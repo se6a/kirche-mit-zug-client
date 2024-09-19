@@ -1,0 +1,33 @@
+// prettier-ignore
+:root {
+	--page-maxWidth: 1800px;
+
+	--page-padding-x: var(--size-m);
+	--page-padding-y: var(--size-m);
+	--page-padding: var(--page-padding-y) var(--page-padding-x);
+
+    --page-clientOffset-x: max(var(--page-padding-x), calc((100vw - var(--page-maxWidth)) / 2));
+    --page-clientWidth: calc(100vw - 2 * var(--page-clientOffset-x));
+
+    --header-height: 2.4em;
+    --header-padding-y: 0.4em;
+    --header-padding-x: var(--page-padding-x);
+    --header-padding: var(--header-padding-y) var(--header-padding-x);
+}
+
+:root {
+	--icon-size: 2em;
+
+	--line-width: 1.2px;
+	--line-45deg-width: 2px;
+	--icon-height: 1em;
+	--icon-width: 1em;
+
+	@media (-webkit-min-device-pixel-ratio: 2) {
+		--line-width: 1.2px;
+	}
+
+	@media (width <= $bp-s-maxWidth) {
+		--logo-width: 100px;
+	}
+}

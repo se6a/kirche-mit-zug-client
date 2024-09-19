@@ -1,0 +1,28 @@
+:root {
+	font-size: clamp(var(--rootFont-size-min), var(--rootFont-size), var(--rootFont-size-max));
+	--_rootFont-size: calc(0.8vw + 1px);
+	--rootFont-size-min: 12px;
+	--rootFont-size: round(up, var(--_rootFont-size), 2px);
+	--rootFont-size-max: 20px;
+
+	--_font-size-s: 1.2rem;
+	--_font-size-m: 1.6rem;
+	--_font-size-l: 2.2rem;
+	--_font-size-xl: 3rem;
+
+	--font-size-s: var(--_font-size-s);
+	--font-size-m: var(--_font-size-m);
+	--font-size-l: var(--_font-size-l);
+	--font-size-xl: var(--_font-size-xl);
+	--font-size-s: round(up, var(--_font-size-s), 1px);
+	--font-size-m: round(up, var(--_font-size-m), 1px);
+	--font-size-l: round(up, var(--_font-size-l), 1px);
+	--font-size-xl: round(up, var(--_font-size-xl), 1px);
+
+	@media (width <= $bp-s-maxWidth) {
+		--_font-size-s: 1.2rem;
+		--_font-size-m: 1.6rem;
+		--_font-size-l: 2.2rem;
+		--_font-size-xl: 2.4rem;
+	}
+}

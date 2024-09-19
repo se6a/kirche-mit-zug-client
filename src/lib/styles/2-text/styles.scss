@@ -1,0 +1,38 @@
+/*  Text Width
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+[data-text~='width-m'] {
+	max-width: var(--txt-width-m);
+}
+
+[data-text~='width-l'] {
+	max-width: var(--txt-width-l);
+}
+
+/*  Text Size
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+[data-text~='s'] {
+	font-size: var(--font-size-s);
+	line-height: 1.25;
+}
+
+[data-text~='m'] {
+	font-size: var(--font-size-m);
+}
+
+[data-text~='l'] {
+	font-size: var(--font-size-l);
+}
+
+/*  Decorations
+~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~~*/
+
+[data-text~='guillemets'] {
+	&::before {
+		content: '«';
+	}
+	&::after {
+		content: '»';
+	}
+}

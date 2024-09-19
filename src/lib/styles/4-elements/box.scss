@@ -1,0 +1,16 @@
+:root {
+	--box-padding-x: var(--size-s);
+	--box-padding-y: var(--size-s);
+	--box-padding: var(--box-padding-y) var(--box-padding-x);
+}
+
+[data-as~='box'] {
+	padding: var(--size-l);
+	@media (max-width: $bp-m-maxWidth) {
+		padding: var(--size-m);
+	}
+
+	@media (max-width: $bp-s-maxWidth) {
+		padding: var(--size-m) var(--size-s);
+	}
+}
