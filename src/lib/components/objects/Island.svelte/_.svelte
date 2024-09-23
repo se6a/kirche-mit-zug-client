@@ -1,11 +1,10 @@
 <script>
-	import island1 from './svg/island1.svg';
-
 	const {index} = $props();
+	const src = '/assets/islands/island1.svg';
 </script>
 
-<div class="ISLAND" style:--mask="url({island1})">
-	<img src={island1} />
+<div class="ISLAND" style:--mask="url({src})">
+	<img {src} aria-hidden="true" alt="" />
 	<!-- <div class="_id">
 		id: {id} / index: {index}
 	</div> -->
