@@ -1,6 +1,7 @@
 <script>
 	import Page from '$lib/components/layout/Page.svelte';
 	import PageSections from '$lib/components/layout/PageSections.svelte';
+	import SectionText from '$lib/components/layout/SectionText.svelte';
 	import IslandsList from '$lib/components/objects/IslandsList.svelte';
 
 	const islandCount = 10;
@@ -15,6 +16,7 @@
 <Page>
 	<PageSections>
 		<IslandsList data={islands}></IslandsList>
+		<SectionText></SectionText>
 	</PageSections>
 </Page>
 

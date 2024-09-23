@@ -13,6 +13,22 @@
 	}
 }
 
+[data-layout~='1-1-1'] {
+	grid-template-columns: repeat(3, 1fr);
+
+	&[data-layout~='rsp-1'] {
+		@media (width <= $bp-l-maxWidth) {
+			grid-template-columns: repeat(2, 1fr) !important;
+		}
+		@media (width <= $bp-m-maxWidth) {
+			grid-template-columns: repeat(2, 1fr) !important;
+		}
+		@media (width <= $bp-s-maxWidth) {
+			grid-template-columns: 1fr !important;
+		}
+	}
+}
+
 [data-layout~='1-1-1-1'] {
 	grid-template-columns: repeat(4, 1fr);
 

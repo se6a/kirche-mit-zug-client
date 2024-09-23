@@ -14,7 +14,7 @@
 	.PAGE-SECTIONS {
 		display: flex;
 		flex-direction: column;
-		gap: var(--size-2xl);
-		margin-top: var(--size-l);
+		padding-bottom: calc(3 * var(--size-xl));
+		gap: var(--gridL-gap);
 	}
 </style>

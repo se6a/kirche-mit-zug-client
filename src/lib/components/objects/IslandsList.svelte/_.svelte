@@ -26,42 +26,49 @@
 	};
 </script>
 
-<!-- {#key activeCategories} -->
 <div class="ISLANDS">
 	<Filter {setActiveCategories}></Filter>
 
 	<ul>
 		{#each islands as { item, layout }, i}
-			{@const {align, islandIndex, x, y} = layout}
+			{@const {align, islandId, x, y, size} = layout}
 			<li
 				class="_{(i + 1) % islandsLayout.length}"
 				style:--align={align}
 				style:--x="{x}%"
 				style:--y="{y}%"
+				style:--size={size}
 				data-category={item.category.id}
 				data-is-visible={activeCategories.includes(item.category.id)}
 			>
-				<Island index={islandIndex}></Island>
+				<!-- <a href="/insel/{item.category.id}"> -->
+				<div>
+					<Island id={islandId + 1}></Island>
+				</div>
+				<!-- </a> -->
 			</li>
 		{/each}
 	</ul>
 </div>
 
-<!-- {/key} -->
-
 <style lang="scss">
-	.ISLANDS :global(.FILTER) {
-		z-index: 10;
+	.ISLANDS {
+		--island-baseSize: 39%;
+		:global(.FILTER) {
+			z-index: 10;
+			position: absolute;
+			left: 0;
+			right: 0;
+		}
 	}
+
 	ul {
 		display: grid;
 		grid-template-columns: 100%;
 		grid-template-rows: auto;
 		grid-auto-rows: auto;
-		border: 1px solid red;
 		z-index: 1;
-
-		--island-baseSize: 39%;
+		width: 100%;
 	}
 
 	[data-category='1'] {
@@ -88,9 +95,19 @@
 
 	li {
 		width: 100%;
-		border: 1px solid black;
+		position: relative;
 		display: flex;
 		justify-content: var(--align);
+		pointer-events: none;
+
+		:global(a) {
+			pointer-events: all;
+		}
+
+		> div {
+			display: block;
+			width: calc(var(--island-baseSize) * var(--size));
+		}
 
 		&[data-is-visible='false'] {
 			display: none;
@@ -132,5 +149,33 @@
 	li._6[data-is-visible='true'] + li._0 {
 		margin-top: var(--y);
 		margin-left: var(--x);
+	}
+
+	/* RESPONSIVE
+******************************************************************************/
+	@media (width < 1250px) {
+		ul {
+			margin-top: 14%;
+		}
+	}
+
+	@media (width < 1100px) {
+		ul {
+			margin-top: unset;
+		}
+
+		.ISLANDS :global(.FILTER) {
+			position: relative;
+		}
+	}
+
+	@media (width <= $bp-s-maxWidth) {
+		li {
+			margin: unset !important;
+
+			div {
+				width: 100%;
+			}
+		}
 	}
 </style>

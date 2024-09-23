@@ -42,10 +42,8 @@
 		display: flex;
 		flex-direction: column;
 		align-items: center;
-		position: absolute;
-		left: 0;
-		right: 0;
-		// top: 0;
+		pointer-events: none;
+		font-size: var(--font-size-s);
 	}
 
 	#toggleShowFilter + label {
@@ -68,6 +66,7 @@
 
 	label {
 		display: inline-block;
+		pointer-events: all;
 	}
 
 	input {

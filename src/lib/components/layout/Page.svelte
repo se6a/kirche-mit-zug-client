@@ -31,6 +31,7 @@
 		max-width: var(--page-maxWidth);
 		margin-left: auto;
 		margin-right: auto;
-		padding: var(--page-padding);
+		padding-inline: var(--page-paddingX);
+		padding-top: var(--page-paddingY);
 	}
 </style>
