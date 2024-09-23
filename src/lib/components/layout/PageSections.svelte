@@ -1,5 +1,4 @@
 <script>
-	import PageSectionBasic from './PageSectionBasic.svelte';
 	const props = $props();
 	const children = props?.children;
 	const data = props?.data || [];
@@ -9,9 +8,6 @@
 	{#if children}
 		{@render children()}
 	{/if}
-	{#each data as section}
-		<PageSectionBasic data={section.item}></PageSectionBasic>
-	{/each}
 </div>
 
 <style lang="scss">

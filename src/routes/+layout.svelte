@@ -1,9 +1,9 @@
 <script>
 	import '$lib/styles/index.scss';
 
-	import { page } from '$app/stores';
-	import { browser } from '$app/environment';
-	import { beforeNavigate } from '$app/navigation';
+	import {page} from '$app/stores';
+	import {browser} from '$app/environment';
+	import {beforeNavigate} from '$app/navigation';
 
 	import Favicon from '$lib/components/bits/Favicon.svelte';
 
@@ -18,7 +18,7 @@
 	$effect(() => {
 		if (!browser) return;
 		if (!$page?.url?.hash) {
-			window.scrollTo({ top: 0 });
+			window.scrollTo({top: 0});
 		}
 
 		let timeout = setTimeout(() => {
@@ -34,7 +34,4 @@
 	{@render children()}
 {/if}
 
-<Favicon></Favicon>
-
-<style lang="scss" global>
-</style>
+<!-- <Favicon></Favicon> -->

@@ -1,10 +1,18 @@
 :root {
-	--box-padding-x: var(--size-s);
-	--box-padding-y: var(--size-s);
-	--box-padding: var(--box-padding-y) var(--box-padding-x);
+	--box-paddingX: var(--size-m);
+	--box-paddingY: var(--size-m);
+	--box-padding: var(--box-paddingY) var(--box-paddingX);
+
+	--boxSmall-paddingX: var(--size-s);
+	--boxSmall-paddingY: var(--size-s);
+	--boxSmall-padding: var(--boxSmall-paddingY) var(--boxSmall-paddingX);
 }
 
-[data-as~='box'] {
+@mixin box-s {
+	padding: var(--boxSmall-padding);
+}
+
+@mixin box {
 	padding: var(--size-l);
 	@media (max-width: $bp-m-maxWidth) {
 		padding: var(--size-m);
@@ -13,4 +21,8 @@
 	@media (max-width: $bp-s-maxWidth) {
 		padding: var(--size-m) var(--size-s);
 	}
+}
+
+[data-as~='box'] {
+	@include box;
 }

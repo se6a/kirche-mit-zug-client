@@ -6,12 +6,13 @@
 	const children = props?.children;
 
 	const data = props.data;
-	const {title = '', description = ''} = data?.metaTranslations?.[0] || {};
+	const title = '';
+	const description = '';
 </script>
 
 <svelte:head>
-	<title>{title ? `${title} - ` : ''}Tour de Lorainne</title>
-	<meta name="description" content={description ? description : 'Tour de Lorainne'} />
+	<title>{title ? `${title} - ` : ''}Kirche mit Zug</title>
+	<meta name="description" content={description ? description : 'Kirche mit Zug'} />
 </svelte:head>
 
 <Header></Header>
@@ -26,17 +27,10 @@
 
 <style lang="scss" global>
 	main {
-		z-index: -1;
-		isolation: isolate;
-		position: relative;
-		flex: 1;
-	}
-
-	main,
-	:global(footer) {
 		width: 100%;
 		max-width: var(--page-maxWidth);
 		margin-left: auto;
 		margin-right: auto;
+		padding: var(--page-padding);
 	}
 </style>

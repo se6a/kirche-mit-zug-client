@@ -1,0 +1,76 @@
+:root {
+	--button1-paddingX: var(--size-m);
+	--button1-paddingY: var(--size-s);
+	--button1-padding: var(--button1-paddingY) var(--button1-paddingX);
+	--button1-borderRadius: 0.6em;
+
+	--button1-isInit-color1: black;
+	--button1-isInit-color2: white;
+	--button1-isActive-color1: white;
+	--button1-isActive-color2: black;
+}
+
+@mixin outline {
+	pointer-events: none;
+	content: '';
+	border: var(--lineM-width) solid currentColor;
+	border-radius: inherit;
+	inset: 0;
+	display: block;
+	position: absolute;
+}
+
+// Button Basic
+
+[data-as*='button1'] {
+	display: block;
+	text-transform: uppercase;
+	background-color: var(--button1-isInit-color1);
+	color: var(--button1-isInit-color2);
+	border-radius: var(--button1-borderRadius);
+	line-height: 1;
+	padding: var(--button1-padding);
+	position: relative;
+	-webkit-user-select: none;
+	user-select: none;
+	> * {
+		margin-top: 0.2em; // Correct label Position;
+	}
+}
+
+input:checked + label[data-as*='button1'],
+[data-as*='button1']:active {
+	background-color: var(--button1-isActive-color1);
+	color: var(--button1-isActive-color2);
+	&::before {
+		@include outline;
+	}
+}
+
+[data-as*='button1']:hover,
+[data-as*='button1']:focus {
+	&::after {
+		@include outline;
+		inset: -0.2em;
+	}
+}
+
+// Button Outline
+
+[data-as~='button1-outline'] {
+	background-color: var(--button1-isInit-color1);
+	color: var(--button1-isInit-color2);
+	box-sizing: content-box;
+	&::before {
+		@include outline;
+	}
+}
+
+input:checked + label[data-as='button1-outline'],
+[data-as='button1-outline']:active {
+	background-color: var(--button1-isActive-color1);
+	color: var(--button1-isActive-color2);
+	&::before {
+		@include outline;
+	}
+}
