@@ -3,7 +3,7 @@
 </script>
 
 <header class="PAGE-HEADER">
-	<a href="/">
+	<a href="/#ueber">
 		<Logo></Logo>
 	</a>
 </header>
@@ -17,6 +17,16 @@
 		margin-left: auto;
 		margin-right: auto;
 		padding: var(--page-padding);
+		z-index: var(--z-front);
+		pointer-events: none;
+
+		> * {
+			pointer-events: all;
+		}
+
+		a {
+			display: inline-block;
+		}
 
 		.LOGO {
 			width: 10vw;

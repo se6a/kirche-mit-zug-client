@@ -1,12 +1,14 @@
 <script>
 	import Island from '../Island.svelte';
 	import Filter from './Filter.svelte';
+	import Counter from '../Counter.svelte';
 	import islandsLayout from './islandsLayout';
 	import categories from './categories';
 	import {onMount} from 'svelte';
 
 	const {data} = $props();
 
+	let NIslands;
 	const islands = [];
 
 	for (let i = 0; i < data.length; i++) {
@@ -73,15 +75,31 @@
 		window.addEventListener('resize', callback, {once: true});
 	}
 
+	let visibleItemCount = $state(islands.length);
+	function setVisibleItemCount() {
+		visibleItemCount = [...NIslands.querySelectorAll("li[data-is-active='true']")].length;
+	}
+
+	$effect(() => {
+		activeCategories;
+		setVisibleItemCount();
+	});
+
 	onMount(() => {
 		handleResize();
 	});
 </script>
 
 <div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
-	<Filter {setActiveCategories}></Filter>
+	<Filter {setActiveCategories} {setVisibleItemCount}></Filter>
 
-	<ul>
+	<div class="_count">
+		<span>
+			<Counter crntNumber={visibleItemCount} />/{islands.length}
+		</span><span>Inseln</span>
+	</div>
+
+	<ul bind:this={NIslands}>
 		{#each islands as { item, layout }, i}
 			{@const {align, islandId, x, y, size} = layout}
 			<li
@@ -111,6 +129,29 @@
 			position: absolute;
 			left: 0;
 			right: 0;
+		}
+	}
+
+	._count {
+		position: absolute;
+		display: flex;
+		right: var(--page-paddingY);
+		top: var(--page-paddingX);
+		opacity: 0;
+		transition: opacity var(--ms-m);
+		gap: 0.4em;
+
+		span:first-child {
+			text-align: right;
+			display: inline-block;
+			width: 5ch;
+			white-space: nowrap;
+		}
+	}
+
+	.ISLANDS[data-is-filtered='true'] {
+		._count {
+			opacity: 1;
 		}
 	}
 
@@ -215,12 +256,18 @@
 	}
 
 	@media (width < 1100px) {
-		ul {
-			margin-top: var(--size-xl);
-		}
-
 		.ISLANDS :global(.FILTER) {
 			position: relative;
+		}
+
+		._count {
+			position: relative;
+			left: 0;
+			right: 0;
+			justify-content: center;
+		}
+		ul {
+			margin-top: var(--size-xl);
 		}
 	}
 

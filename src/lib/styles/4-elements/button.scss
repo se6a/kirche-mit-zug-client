@@ -11,11 +11,12 @@
 }
 
 @mixin outline {
+	---inset: 0em;
 	pointer-events: none;
 	content: '';
 	border: var(--lineM-width) solid black;
-	border-radius: inherit;
-	inset: 0;
+	border-radius: calc(var(--button1-borderRadius) - var(---inset));
+	inset: var(---inset);
 	display: block;
 	position: absolute;
 }
@@ -53,7 +54,7 @@ input:checked + label[data-as*='button1'],
 	color: var(--button1-isActive-color2);
 	&::after {
 		@include outline;
-		inset: -0.2em;
+		---inset: -0.2em;
 	}
 }
 
