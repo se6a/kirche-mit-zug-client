@@ -16,7 +16,7 @@
 <Page>
 	<PageSections>
 		<IslandsList data={islands}></IslandsList>
-		<SectionText></SectionText>
+		<SectionText id="ueber"></SectionText>
 	</PageSections>
 </Page>
 

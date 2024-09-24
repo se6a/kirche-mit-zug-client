@@ -1,2 +1,7 @@
 @import './--config.scss';
 @import './templates.scss';
+
+html,
+body {
+	scroll-behavior: smooth;
+}

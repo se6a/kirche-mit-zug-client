@@ -1,4 +1,13 @@
-<section id="ueber">
+<script>
+	import Anchor from '../bits/Anchor.svelte';
+
+	const {id} = $props();
+</script>
+
+<section>
+	{#if id}
+		<Anchor {id}></Anchor>
+	{/if}
 	<header>
 		<h2>
 			<div>ÜBER KIRCHE</div>
