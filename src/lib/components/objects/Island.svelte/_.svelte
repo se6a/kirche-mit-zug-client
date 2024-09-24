@@ -73,6 +73,7 @@
 		justify-content: center;
 		align-content: center;
 		gap: 1em;
+		pointer-events: none;
 
 		line-height: 1;
 

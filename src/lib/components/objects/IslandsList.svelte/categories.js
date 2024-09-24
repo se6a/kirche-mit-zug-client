@@ -21,7 +21,7 @@ export default [
 	},
 	{
 		id: 6,
-		name: 'Gemeinschafter',
+		name: 'Gemeinschaften',
 	},
 	{
 		id: 7,

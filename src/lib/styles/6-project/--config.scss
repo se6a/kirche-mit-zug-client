@@ -7,3 +7,25 @@
 	--color-6: #a7e1f4;
 	--color-7: #3f6db4;
 }
+
+[data-category='1'] {
+	--color-category: var(--color-1);
+}
+[data-category='2'] {
+	--color-category: var(--color-2);
+}
+[data-category='3'] {
+	--color-category: var(--color-3);
+}
+[data-category='4'] {
+	--color-category: var(--color-4);
+}
+[data-category='5'] {
+	--color-category: var(--color-5);
+}
+[data-category='6'] {
+	--color-category: var(--color-6);
+}
+[data-category='7'] {
+	--color-category: var(--color-7);
+}

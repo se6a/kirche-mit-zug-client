@@ -13,7 +13,7 @@
 @mixin outline {
 	pointer-events: none;
 	content: '';
-	border: var(--lineM-width) solid currentColor;
+	border: var(--lineM-width) solid black;
 	border-radius: inherit;
 	inset: 0;
 	display: block;
@@ -49,6 +49,8 @@ input:checked + label[data-as*='button1'],
 
 [data-as*='button1']:hover,
 [data-as*='button1']:focus {
+	background-color: var(--button1-isActive-color1);
+	color: var(--button1-isActive-color2);
 	&::after {
 		@include outline;
 		inset: -0.2em;

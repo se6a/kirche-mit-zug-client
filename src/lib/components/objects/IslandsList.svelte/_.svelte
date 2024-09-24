@@ -3,6 +3,7 @@
 	import Filter from './Filter.svelte';
 	import islandsLayout from './islandsLayout';
 	import categories from './categories';
+	import {onMount} from 'svelte';
 
 	const {data} = $props();
 
@@ -20,13 +21,64 @@
 		islands.push(item);
 	}
 
-	let activeCategories = $state(categories.map((c) => c.id));
+	let isFiltered = $state(false);
+	let activeCategories = $state([]);
+
 	const setActiveCategories = (newCategories) => {
 		activeCategories = newCategories;
+		isFiltered = activeCategories?.length > 0;
 	};
+
+	const NListItems = [];
+	function observeItemHeight(N) {
+		setItemActiveHeight(N);
+		NListItems.push(N);
+	}
+
+	function setItemActiveHeight(NItem) {
+		const NImg = NItem.querySelector('img');
+		NItem.style.setProperty('--height-active', `${NImg.clientHeight}px`);
+	}
+
+	function setAllItemsActiveHeight(NListItems) {
+		for (let i = 0; i < NListItems.length; i++) {
+			const N = NListItems[i];
+			setItemActiveHeight(N);
+		}
+	}
+
+	let setFilterHeight;
+	function observeFilterHeight(N) {
+		const NFilter = N.querySelector('.FILTER');
+		setFilterHeight = () => {
+			const height = NFilter.clientHeight;
+			N.style.setProperty('--filter-height', `${height}px`);
+		};
+		setFilterHeight();
+	}
+
+	function handleResize() {
+		let timeoutId;
+
+		const callback = () => {
+			if (timeoutId) clearTimeout(timeoutId);
+			timeoutId = setTimeout(() => {
+				setAllItemsActiveHeight(NListItems);
+				setFilterHeight();
+				window.addEventListener('resize', callback, {once: true});
+				timeoutId = null;
+			}, 1000);
+		};
+
+		window.addEventListener('resize', callback, {once: true});
+	}
+
+	onMount(() => {
+		handleResize();
+	});
 </script>
 
-<div class="ISLANDS">
+<div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
 	<Filter {setActiveCategories}></Filter>
 
 	<ul>
@@ -34,18 +86,18 @@
 			{@const {align, islandId, x, y, size} = layout}
 			<li
 				class="_{(i + 1) % islandsLayout.length}"
-				style:--align={align}
-				style:--x="{x}%"
-				style:--y="{y}%"
-				style:--size={size}
+				data-align={align}
+				style:---x="{x}%"
+				style:---y="{y}%"
+				style:---size={size}
 				data-category={item.category.id}
-				data-is-visible={activeCategories.includes(item.category.id)}
+				data-is-active={!isFiltered || activeCategories.includes(item.category.id)}
+				style:--height-active="auto"
+				use:observeItemHeight
 			>
-				<!-- <a href="/insel/{item.category.id}"> -->
-				<div>
+				<div class="_inner">
 					<Island id={islandId + 1}></Island>
 				</div>
-				<!-- </a> -->
 			</li>
 		{/each}
 	</ul>
@@ -63,105 +115,108 @@
 	}
 
 	ul {
-		display: grid;
-		grid-template-columns: 100%;
-		grid-template-rows: auto;
-		grid-auto-rows: auto;
+		--offsetTop: 0px;
+		margin-top: var(--offsetTop);
+		transition: margin-top var(--ms-m);
+		position: relative;
+		display: flex;
+		flex-direction: column;
 		z-index: 1;
 		width: 100%;
+
+		min-height: 80vh;
+		min-height: 80dvh;
 	}
 
-	[data-category='1'] {
-		--color-category: var(--color-1);
-	}
-	[data-category='2'] {
-		--color-category: var(--color-2);
-	}
-	[data-category='3'] {
-		--color-category: var(--color-3);
-	}
-	[data-category='4'] {
-		--color-category: var(--color-4);
-	}
-	[data-category='5'] {
-		--color-category: var(--color-5);
-	}
-	[data-category='6'] {
-		--color-category: var(--color-6);
-	}
-	[data-category='7'] {
-		--color-category: var(--color-7);
+	[data-is-filtered='true'] ul {
+		--offsetTop: calc(var(--filter-height) + var(--size-m));
 	}
 
 	li {
-		width: 100%;
+		--size: var(---size);
+		--x: var(---x);
+		--y: var(---y);
 		position: relative;
 		display: flex;
-		justify-content: var(--align);
+		width: 100%;
+		transition-property: transform, opacity;
+		transform-origin: center;
+		transition-duration: var(--ms-m);
 		pointer-events: none;
+
+		&[data-align='start'] {
+			justify-content: flex-start;
+		}
+
+		&[data-align='center'] {
+			justify-content: center;
+		}
+
+		&[data-align='end'] {
+			justify-content: flex-end;
+		}
+
+		> ._inner {
+			display: block;
+			width: calc(var(--island-baseSize) * var(--size));
+			margin-top: var(--y);
+			margin-left: var(--x);
+			transition:
+				transform var(--ms-m),
+				height var(--ms-m);
+			height: var(--height-active, auto);
+		}
+
+		&:first-child > ._inner {
+			--y: 0px;
+		}
 
 		:global(a) {
 			pointer-events: all;
 		}
+	}
 
-		> div {
-			display: block;
-			width: calc(var(--island-baseSize) * var(--size));
+	.ISLANDS[data-is-filtered='true'] {
+		li[data-is-active='true'] {
+			opacity: 1;
+			--y: 0px;
+
+			&[data-align='start'] {
+				transform: translateX(25%);
+			}
+
+			&[data-align='end'] {
+				transform: translateX(-25%);
+			}
+
+			._inner {
+				transform: scale(1);
+				height: var(--height-active);
+			}
 		}
 
-		&[data-is-visible='false'] {
-			display: none;
+		li[data-is-active='false'] {
+			opacity: 0.1;
+
+			._inner {
+				transform: scale(0);
+				height: 0;
+			}
 		}
-	}
-
-	li._0[data-is-visible='true'] + li._1 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	li._1[data-is-visible='true'] + li._2 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	li._2[data-is-visible='true'] + li._3 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	li._3[data-is-visible='true'] + li._4 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	li._4[data-is-visible='true'] + li._5 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	li._5[data-is-visible='true'] + li._6 {
-		margin-top: var(--y);
-		margin-left: var(--x);
-	}
-
-	//
-
-	li._6[data-is-visible='true'] + li._0 {
-		margin-top: var(--y);
-		margin-left: var(--x);
 	}
 
 	/* RESPONSIVE
 ******************************************************************************/
 	@media (width < 1250px) {
 		ul {
+			--filter-height: 0px;
 			margin-top: 14%;
 		}
 	}
 
 	@media (width < 1100px) {
 		ul {
-			margin-top: unset;
+			margin-top: var(--size-xl);
 		}
 
 		.ISLANDS :global(.FILTER) {
@@ -171,10 +226,17 @@
 
 	@media (width <= $bp-s-maxWidth) {
 		li {
-			margin: unset !important;
+			--y: 0px;
+			--x: 0px;
 
-			div {
+			justify-items: center;
+			> ._inner {
+				margin: unset !important;
 				width: 100%;
+			}
+
+			&[data-is-active='true'] {
+				transform: unset !important;
 			}
 		}
 	}

@@ -5,11 +5,22 @@
 	let showFilter = $state(true);
 	let NForm;
 
+	function selectOne(NSelected) {
+		const NChecked = [...NForm.querySelectorAll('input:checked')];
+		NChecked.forEach((N) => {
+			if (NSelected.checked && N.isEqualNode(NSelected) === false) {
+				N.checked = false;
+			}
+		});
+
+		const selectedId = parseInt(NSelected.dataset.category);
+		if (NSelected.checked && selectedId) setActiveCategories([selectedId]);
+		else setActiveCategories([]);
+	}
+
 	function handleChange(e) {
 		e.preventDefault();
-		const NActive = [...NForm.querySelectorAll('input:checked')];
-		const activeCategories = NActive.map((N) => parseInt(N.dataset.category));
-		setActiveCategories(activeCategories);
+		selectOne(e.target);
 	}
 </script>
 
@@ -22,7 +33,7 @@
 	<form onchange={handleChange} bind:this={NForm}>
 		<fieldset>
 			{#each categories as { id, name }}
-				<input id="cb-{id}" type="checkbox" data-category={id} checked />
+				<input id="cb-{id}" type="checkbox" data-category={id} />
 				<label
 					for="cb-{id}"
 					data-as="button1"
