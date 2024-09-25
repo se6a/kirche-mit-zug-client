@@ -114,7 +114,8 @@
 				use:observeItemHeight
 			>
 				<div class="_inner">
-					<Island id={islandId + 1}></Island>
+					<Island text={{line1: 'Kategorie', line2: 'Mehr Text'}} id={islandId + 1}
+					></Island>
 				</div>
 			</li>
 		{/each}
