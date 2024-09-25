@@ -83,8 +83,6 @@
 	input {
 		width: 0px;
 		height: 0px;
-		visibility: hidden;
-		pointer-events: none;
 		position: absolute;
 	}
 </style>

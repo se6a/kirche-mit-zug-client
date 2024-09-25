@@ -1,18 +1,22 @@
 <script>
 	import islands from './islands';
+	import LightHouse from './LightHouse.svelte';
 	const {id, text} = $props();
-	const src = `/assets/islands/island${id}.svg`;
 
 	const island = islands.find((island) => island.id === id);
 	const textColumns = 5; // odd number
 	const textRows = 7; // odd number
 	const centerCell = ~~((textColumns * textRows) / 2) + 1;
+	const hasLighthouse = Math.random() > 0.5;
 </script>
 
 <div
 	class="ISLAND"
 	style:--island-clipPath="url(#clip-island-{id})"
 	style:--island-aspectRatio={island?.aspectRatio}
+	style:--island-textOffset={island?.textOffset}
+	style:--island-lighthousePosition={island?.lighthousePosition}
+	data-has-lighthouse={hasLighthouse}
 >
 	<svg width="0" height="0">
 		<defs>
@@ -43,22 +47,22 @@
 				{/each}
 			</div>
 		</a>
+
+		<div class="_lighthouse">
+			<LightHouse></LightHouse>
+		</div>
 	</div>
 </div>
 
 <style lang="scss">
 	.ISLAND {
 		width: 100%;
-		clip-path: url('#test-path');
-
 		position: relative;
-		overflow: hidden;
 	}
 
 	._inner {
 		aspect-ratio: var(--island-aspectRatio);
 		overflow: hidden;
-		border: 1px solid black;
 	}
 
 	a {
@@ -80,7 +84,26 @@
 		opacity: 0;
 	}
 
+	[data-has-lighthouse='false'] ._lighthouse {
+		display: none;
+	}
+
+	._lighthouse {
+		pointer-events: none;
+		position: absolute;
+		inset: 0;
+		transform: translate(var(--island-lighthousePosition));
+		display: flex;
+		align-items: center;
+		justify-content: center;
+
+		> :global(svg) {
+			margin: auto;
+		}
+	}
+
 	._text {
+		transform: translate(var(--island-textOffset));
 		position: absolute;
 		inset: 0;
 		margin: auto;

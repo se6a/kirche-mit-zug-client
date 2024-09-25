@@ -1,10 +1,11 @@
 <script>
-	import Island from '../Island.svelte';
 	import Filter from './Filter.svelte';
 	import Counter from '../Counter.svelte';
-	import islandsLayout from './islandsLayout';
+	import {onMount, setContext} from 'svelte';
+	import itemsLayout from './itemssLayout';
 	import categories from './categories';
-	import {onMount} from 'svelte';
+	import ItemIsland from './ItemIsland.svelte';
+	import ItemImage from './ItemImage.svelte';
 
 	const {data} = $props();
 
@@ -14,7 +15,7 @@
 	for (let i = 0; i < data.length; i++) {
 		const randomCategory = categories[~~(Math.random() * categories.length)];
 		const item = {
-			layout: islandsLayout[i % islandsLayout.length],
+			layout: itemsLayout[i % itemsLayout.length],
 			item: {
 				...data[i],
 				category: randomCategory,
@@ -39,7 +40,7 @@
 
 	function setItemActiveHeight(NItem) {
 		const NImg = NItem.querySelector('.ISLAND');
-		NItem.style.setProperty('--height-active', `${NImg.clientHeight}px`);
+		NItem.style.setProperty('--itemIsland-heightActive', `${NImg.clientHeight}px`);
 	}
 
 	function setAllItemsActiveHeight(NListItems) {
@@ -101,23 +102,20 @@
 
 	<ul bind:this={NIslands}>
 		{#each islands as { item, layout }, i}
-			{@const {align, islandId, x, y, size} = layout}
-			<li
-				class="_{(i + 1) % islandsLayout.length}"
-				data-align={align}
-				style:---x="{x}%"
-				style:---y="{y}%"
-				style:---size={size}
-				data-category={item.category.id}
-				data-is-active={!isFiltered || activeCategories.includes(item.category.id)}
-				style:--height-active="auto"
-				use:observeItemHeight
-			>
-				<div class="_inner">
-					<Island text={{line1: 'Kategorie', line2: 'Mehr Text'}} id={islandId + 1}
-					></Island>
-				</div>
-			</li>
+			<ItemIsland
+				layout={layout.island}
+				data={item}
+				isActive={!isFiltered || activeCategories.includes(item.category.id)}
+				{observeItemHeight}
+			></ItemIsland>
+
+			{#if layout.extras.length}
+				{#each layout.extras as extra, ii}
+					{#if extra.type === 'image'}
+						<ItemImage index="{i}-{ii}" layout={extra}></ItemImage>
+					{/if}
+				{/each}
+			{/if}
 		{/each}
 	</ul>
 </div>
@@ -174,79 +172,6 @@
 		--offsetTop: calc(var(--filter-height) + var(--size-m));
 	}
 
-	li {
-		--size: var(---size);
-		--x: var(---x);
-		--y: var(---y);
-		position: relative;
-		display: flex;
-		width: 100%;
-		transition-property: transform, opacity;
-		transform-origin: center;
-		transition-duration: var(--ms-m);
-		pointer-events: none;
-
-		&[data-align='start'] {
-			justify-content: flex-start;
-		}
-
-		&[data-align='center'] {
-			justify-content: center;
-		}
-
-		&[data-align='end'] {
-			justify-content: flex-end;
-		}
-
-		> ._inner {
-			display: block;
-			width: calc(var(--island-baseSize) * var(--size));
-			margin-top: var(--y);
-			margin-left: var(--x);
-			transition:
-				transform var(--ms-m),
-				height var(--ms-m);
-			height: var(--height-active, auto);
-		}
-
-		&:first-child > ._inner {
-			--y: 0px;
-		}
-
-		:global(a) {
-			pointer-events: all;
-		}
-	}
-
-	.ISLANDS[data-is-filtered='true'] {
-		li[data-is-active='true'] {
-			opacity: 1;
-			--y: 0px;
-
-			&[data-align='start'] {
-				transform: translateX(25%);
-			}
-
-			&[data-align='end'] {
-				transform: translateX(-25%);
-			}
-
-			._inner {
-				transform: scale(1);
-				height: var(--height-active);
-			}
-		}
-
-		li[data-is-active='false'] {
-			opacity: 0.1;
-
-			._inner {
-				transform: scale(0);
-				height: 0;
-			}
-		}
-	}
-
 	/* RESPONSIVE
 ******************************************************************************/
 	@media (width < 1250px) {
@@ -269,23 +194,6 @@
 		}
 		ul {
 			margin-top: var(--size-xl);
-		}
-	}
-
-	@media (width <= $bp-s-maxWidth) {
-		li {
-			--y: 0px;
-			--x: 0px;
-
-			justify-items: center;
-			> ._inner {
-				margin: unset !important;
-				width: 100%;
-			}
-
-			&[data-is-active='true'] {
-				transform: unset !important;
-			}
 		}
 	}
 </style>

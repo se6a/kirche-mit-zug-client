@@ -48,6 +48,7 @@ input:checked + label[data-as*='button1'],
 	}
 }
 
+input:focus + label[data-as*='button1'],
 [data-as*='button1']:hover,
 [data-as*='button1']:focus {
 	background-color: var(--button1-isActive-color1);
@@ -75,5 +76,32 @@ input:checked + label[data-as='button1-outline'],
 	color: var(--button1-isActive-color2);
 	&::before {
 		@include outline;
+	}
+}
+
+//
+
+[data-as='buttonRound1'] {
+	aspect-ratio: 1;
+	border-radius: 50%;
+
+	position: relative;
+}
+
+input:checked + label[data-as='buttonRound1'],
+[data-as='buttonRound1']:active {
+	&::before {
+		@include outline;
+		border-radius: 50%;
+	}
+}
+
+input:focus + label[data-as*='buttonRound1'],
+[data-as*='buttonRound1']:hover,
+[data-as*='buttonRound1']:focus {
+	&::after {
+		@include outline;
+		---inset: -0.2em;
+		border-radius: 50%;
 	}
 }
