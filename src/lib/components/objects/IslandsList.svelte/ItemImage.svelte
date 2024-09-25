@@ -37,12 +37,11 @@
 			margin-top: var(--itemImage-y-normal);
 			transform: translate(-50%, -50%);
 			background-color: black;
-			transform: scale(1);
-			transition: transform var(--ms-s);
 
 			div {
 				visibility: hidden;
 				pointer-events: none;
+				position: absolute;
 			}
 		}
 
@@ -86,7 +85,7 @@
 	:global(.ISLANDS[data-is-filtered='true']) li.ITEM-IMAGE {
 		pointer-events: none;
 		._toggleImage {
-			transform: scale(0);
+			// transform: scale(0);
 		}
 	}
 
