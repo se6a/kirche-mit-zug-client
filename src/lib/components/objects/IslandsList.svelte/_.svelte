@@ -38,7 +38,7 @@
 	}
 
 	function setItemActiveHeight(NItem) {
-		const NImg = NItem.querySelector('img');
+		const NImg = NItem.querySelector('.ISLAND');
 		NItem.style.setProperty('--height-active', `${NImg.clientHeight}px`);
 	}
 

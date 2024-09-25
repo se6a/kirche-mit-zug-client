@@ -63,9 +63,7 @@
 
 	a {
 		clip-path: var(--island-clipPath);
-		// position: absolute;
 		display: block;
-		// inset: 0;
 		z-index: 99;
 		aspect-ratio: 1;
 		min-width: 100%;
