@@ -72,7 +72,15 @@
 		aspect-ratio: 1;
 		min-width: 100%;
 		min-height: 100%;
-		background-color: var(--color-category, black);
+
+		&::after {
+			content: '';
+			position: absolute;
+			inset: 0;
+			display: block;
+			background-color: var(--color-category, black);
+			z-index: -1;
+		}
 	}
 
 	.cell {
@@ -103,7 +111,10 @@
 	}
 
 	._text {
-		transform: translate(var(--island-textOffset));
+		* {
+			// Avoid Render issues by translating every child node individually, not the parent
+			transform: translate(var(--island-textOffset));
+		}
 		position: absolute;
 		inset: 0;
 		margin: auto;
