@@ -103,7 +103,7 @@
 	}
 
 	._text {
-		transform: translate(var(--island-textOffset));
+		// transform: translate(var(--island-textOffset));
 		position: absolute;
 		inset: 0;
 		margin: auto;
@@ -114,6 +114,7 @@
 		align-content: center;
 		gap: 1em;
 		pointer-events: none;
+		overflow: hidden;
 
 		line-height: 1;
 

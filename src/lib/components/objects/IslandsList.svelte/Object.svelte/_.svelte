@@ -39,6 +39,7 @@
 
 	:global(.ISLANDS[data-is-filtered='true']) .OBJECT {
 		transform: scale(0);
+		pointer-events: none;
 	}
 
 	/* RESPONSIVE

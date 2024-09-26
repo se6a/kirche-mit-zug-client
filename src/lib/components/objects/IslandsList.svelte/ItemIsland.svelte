@@ -109,7 +109,6 @@
 		li {
 			--itemIsland-y: 0px;
 			--itemIsland-x: 0px;
-			margin-top: var(--size-l);
 
 			justify-items: center;
 			> ._inner {
@@ -118,6 +117,7 @@
 			}
 
 			&[data-is-active='true'] {
+				margin-top: var(--size-l);
 				transform: unset !important;
 			}
 		}

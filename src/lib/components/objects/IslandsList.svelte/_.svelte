@@ -125,11 +125,6 @@
 
 			{#each itemLayout.objectSlots as objectLayout, ii}
 				<Object layout={objectLayout} index={ii + i} {imageModulus}></Object>
-				<!-- {#if i + ii !== 0 && (i + ii) % imageModulus === 0} -->
-				<!-- <ObjectImage index="{i}-{ii}" layout={slotLayout}></ObjectImage> -->
-				<!-- {:else} -->
-				<!-- hello -->
-				<!-- {/if} -->
 			{/each}
 		{/each}
 	</ul>
