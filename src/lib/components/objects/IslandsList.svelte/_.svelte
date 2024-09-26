@@ -133,9 +133,9 @@
 <style lang="scss">
 	.ISLANDS {
 		--island-baseSize: 39%;
-		--island-lighthouseHeight: 6em;
-		--object-illustrationWidth: 6%;
-		--object-image-buttonWidth: 6%;
+		--island-lighthouseWidth: 6rem;
+		--object-illustrationWidth: 6rem;
+		--object-image-buttonWidth: 4rem;
 
 		:global(.FILTER) {
 			z-index: 10;
@@ -197,9 +197,9 @@
 
 	@media (width < 1100px) {
 		.ISLANDS {
-			--island-lighthouseHeight: 4em;
-			--object-illustrationWidth: 10%;
-			--object-image-buttonWidth: 8%;
+			--island-lighthouseWidth: 6rem;
+			--object-illustrationWidth: 6rem;
+			--object-image-buttonWidth: 4rem;
 			:global(.FILTER) {
 				position: relative;
 			}
@@ -218,9 +218,9 @@
 
 	@media (width < $bp-s-maxWidth) {
 		.ISLANDS {
-			--island-lighthouseHeight: 8em;
-			--object-illustrationWidth: 20%;
-			--object-image-buttonWidth: 14%;
+			--island-lighthouseWidth: 5rem;
+			--object-illustrationWidth: 5rem;
+			--object-image-buttonWidth: 4rem;
 		}
 	}
 </style>

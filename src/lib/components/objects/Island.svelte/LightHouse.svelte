@@ -55,7 +55,7 @@
 
 <style>
 	.LIGHTHOUSE {
-		height: var(--island-lighthouseHeight);
+		width: var(--island-lighthouseWidth);
 	}
 
 	.cls-1,
