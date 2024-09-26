@@ -1,28 +1,39 @@
 <script>
 	import Filter from './Filter.svelte';
 	import Counter from '../Counter.svelte';
-	import {onMount, setContext} from 'svelte';
-	import itemsLayout from './itemssLayout';
+	import {onMount} from 'svelte';
+	import itemsLayout from './itemsLayout';
 	import categories from './categories';
 	import ItemIsland from './ItemIsland.svelte';
-	import ItemImage from './ItemImage.svelte';
+	import Object from './Object.svelte';
 
 	const {data} = $props();
 
 	let NIslands;
-	const islands = [];
 
+	/* Preparing Data
+	 ******************************************************************************/
+
+	let objectSlotCount = 0;
+	const islands = [];
 	for (let i = 0; i < data.length; i++) {
 		const randomCategory = categories[~~(Math.random() * categories.length)];
+		const itemLayout = itemsLayout[i % itemsLayout.length];
 		const item = {
-			layout: itemsLayout[i % itemsLayout.length],
-			item: {
+			itemLayout,
+			data: {
 				...data[i],
 				category: randomCategory,
 			},
 		};
 		islands.push(item);
+		objectSlotCount += itemLayout?.objectSlots?.length || 0;
 	}
+	const imageCount = 10;
+	const imageModulus = ~~(objectSlotCount / imageCount);
+
+	/* Filter
+	 ******************************************************************************/
 
 	let isFiltered = $state(false);
 	let activeCategories = $state([]);
@@ -31,12 +42,6 @@
 		activeCategories = newCategories;
 		isFiltered = activeCategories?.length > 0;
 	};
-
-	const NListItems = [];
-	function observeItemHeight(N) {
-		setItemActiveHeight(N);
-		NListItems.push(N);
-	}
 
 	function setItemActiveHeight(NItem) {
 		const NImg = NItem.querySelector('.ISLAND');
@@ -50,6 +55,19 @@
 		}
 	}
 
+	let visibleItemCount = $state(islands.length);
+	function setVisibleItemCount() {
+		visibleItemCount = [...NIslands.querySelectorAll("li[data-is-active='true']")].length;
+	}
+
+	$effect(() => {
+		activeCategories;
+		setVisibleItemCount();
+	});
+
+	/* Resize
+	 ******************************************************************************/
+
 	let setFilterHeight;
 	function observeFilterHeight(N) {
 		const NFilter = N.querySelector('.FILTER');
@@ -58,6 +76,12 @@
 			N.style.setProperty('--filter-height', `${height}px`);
 		};
 		setFilterHeight();
+	}
+
+	const NListItems = [];
+	function observeItemHeight(N) {
+		setItemActiveHeight(N);
+		NListItems.push(N);
 	}
 
 	function handleResize() {
@@ -76,16 +100,6 @@
 		window.addEventListener('resize', callback, {once: true});
 	}
 
-	let visibleItemCount = $state(islands.length);
-	function setVisibleItemCount() {
-		visibleItemCount = [...NIslands.querySelectorAll("li[data-is-active='true']")].length;
-	}
-
-	$effect(() => {
-		activeCategories;
-		setVisibleItemCount();
-	});
-
 	onMount(() => {
 		handleResize();
 	});
@@ -101,21 +115,22 @@
 	</div>
 
 	<ul bind:this={NIslands}>
-		{#each islands as { item, layout }, i}
+		{#each islands as { data, itemLayout }, i}
 			<ItemIsland
-				layout={layout.island}
-				data={item}
-				isActive={!isFiltered || activeCategories.includes(item.category.id)}
+				layout={itemLayout.island}
+				{data}
+				isActive={!isFiltered || activeCategories.includes(data.category.id)}
 				{observeItemHeight}
 			></ItemIsland>
 
-			{#if layout.extras.length}
-				{#each layout.extras as extra, ii}
-					{#if extra.type === 'image'}
-						<ItemImage index="{i}-{ii}" layout={extra}></ItemImage>
-					{/if}
-				{/each}
-			{/if}
+			{#each itemLayout.objectSlots as objectLayout, ii}
+				<Object layout={objectLayout} index={ii + i} {imageModulus}></Object>
+				<!-- {#if i + ii !== 0 && (i + ii) % imageModulus === 0} -->
+				<!-- <ObjectImage index="{i}-{ii}" layout={slotLayout}></ObjectImage> -->
+				<!-- {:else} -->
+				<!-- hello -->
+				<!-- {/if} -->
+			{/each}
 		{/each}
 	</ul>
 </div>
@@ -123,6 +138,10 @@
 <style lang="scss">
 	.ISLANDS {
 		--island-baseSize: 39%;
+		--island-lighthouseHeight: 6em;
+		--object-illustrationWidth: 6%;
+		--object-image-buttonWidth: 6%;
+
 		:global(.FILTER) {
 			z-index: 10;
 			position: absolute;
@@ -182,8 +201,13 @@
 	}
 
 	@media (width < 1100px) {
-		.ISLANDS :global(.FILTER) {
-			position: relative;
+		.ISLANDS {
+			--island-lighthouseHeight: 4em;
+			--object-illustrationWidth: 10%;
+			--object-image-buttonWidth: 8%;
+			:global(.FILTER) {
+				position: relative;
+			}
 		}
 
 		._count {
@@ -194,6 +218,14 @@
 		}
 		ul {
 			margin-top: var(--size-xl);
+		}
+	}
+
+	@media (width < $bp-s-maxWidth) {
+		.ISLANDS {
+			--island-lighthouseHeight: 8em;
+			--object-illustrationWidth: 20%;
+			--object-image-buttonWidth: 14%;
 		}
 	}
 </style>

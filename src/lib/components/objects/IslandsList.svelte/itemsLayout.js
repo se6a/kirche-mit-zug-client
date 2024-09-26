@@ -6,9 +6,8 @@ export default [
 			position: {y: -18, x: 0},
 			size: 1,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {
 						x: 50,
@@ -30,9 +29,8 @@ export default [
 			position: {y: -40, x: -1},
 			size: 1.2,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {
 						x: 10,
@@ -53,9 +51,8 @@ export default [
 			position: {y: -16, x: 3},
 			size: 0.8,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {
 						x: 80,
@@ -76,9 +73,8 @@ export default [
 			position: {y: -12, x: 3},
 			size: 1,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {
 						x: 36,
@@ -99,16 +95,14 @@ export default [
 			position: {y: -20, x: 0},
 			size: 1.5,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {x: 50, y: -5},
 					small: {x: 90, y: -5},
 				},
 			},
 			{
-				type: 'image',
 				position: {
 					normal: {x: 10, y: 10},
 					small: {x: 10, y: 16},
@@ -123,9 +117,8 @@ export default [
 			position: {y: -2, x: 8},
 			size: 1.2,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {x: 90, y: -20},
 					small: {x: 80, y: 10},
@@ -140,9 +133,8 @@ export default [
 			position: {y: -12, x: 10},
 			size: 1,
 		},
-		extras: [
+		objectSlots: [
 			{
-				type: 'image',
 				position: {
 					normal: {
 						x: 65,
