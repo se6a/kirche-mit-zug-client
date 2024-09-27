@@ -1,13 +1,18 @@
 <script>
 	import islands from './islands';
 	import LightHouse from './LightHouse.svelte';
-	const {id, text} = $props();
+	const {id, text, children} = $props();
 
 	const island = islands.find((island) => island.id === id);
 	const textColumns = 5; // odd number
 	const textRows = 7; // odd number
 	const centerCell = ~~((textColumns * textRows) / 2) + 1;
 	const hasLighthouse = Math.random() > 0.5;
+
+	const splitText = text
+		.split('\n')
+		.map((line) => `<div>${line}</div>`)
+		.join('');
 </script>
 
 <div
@@ -27,26 +32,24 @@
 	</svg>
 
 	<div class="_inner">
-		<a href="">
+		<div class="_clipped">
+			{#if children}
+				{@render children()}
+			{/if}
 			<div class="_text" style:--columns={textColumns} style:--rows={textRows}>
-				{#snippet cellContent()}
-					<div>{text?.line1 || ''}</div>
-					<div>{text?.line2 || ''}</div>
-				{/snippet}
-
 				{#each Array(textColumns * textRows).fill('') as _, i}
 					{#if i + 1 === centerCell}
 						<div class="label">
-							{@render cellContent()}
+							{@html splitText}
 						</div>
 					{:else}
 						<div class="cell">
-							{@render cellContent()}
+							{@html splitText}
 						</div>
 					{/if}
 				{/each}
 			</div>
-		</a>
+		</div>
 
 		<div class="_lighthouse">
 			<LightHouse></LightHouse>
@@ -65,9 +68,8 @@
 		overflow: hidden;
 	}
 
-	a {
+	._clipped {
 		clip-path: var(--island-clipPath);
-		display: block;
 		z-index: 99;
 		aspect-ratio: 1;
 		min-width: 100%;
@@ -88,7 +90,7 @@
 		transition: opacity var(--ms-l);
 	}
 
-	a:hover .cell {
+	:global(a:hover) ~ * .cell {
 		opacity: 0;
 	}
 
@@ -111,10 +113,6 @@
 	}
 
 	._text {
-		* {
-			// Avoid Render issues by translating every child node individually, not the parent
-			transform: translate(var(--island-textOffset));
-		}
 		position: absolute;
 		inset: 0;
 		margin: auto;
@@ -126,8 +124,12 @@
 		gap: 1em;
 		pointer-events: none;
 		overflow: hidden;
-
 		line-height: 1;
+
+		* {
+			// Avoid Render issues by translating every child node individually, not the parent
+			transform: translate(var(--island-textOffset));
+		}
 
 		> div {
 			width: 100%;

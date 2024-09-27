@@ -24,7 +24,9 @@
 	use:observeItemHeight
 >
 	<div class="_inner">
-		<Island {id} text={{line1: 'Kategorie', line2: 'Mehr Text'}}></Island>
+		<Island {id} text={data.islandText}>
+			<a href="/insel/{data.slug}" aria-label="Link zur Unterseite: {data.islandText}"></a>
+		</Island>
 	</div>
 </li>
 
@@ -40,6 +42,11 @@
 		transform-origin: center;
 		transition-duration: var(--ms-m);
 		pointer-events: none;
+
+		a {
+			position: absolute;
+			inset: 0;
+		}
 
 		&[data-align='start'] {
 			justify-content: flex-start;

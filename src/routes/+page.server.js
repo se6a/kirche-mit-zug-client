@@ -7,6 +7,7 @@ export async function load() {
             "islands": * [_type == "islands" && _id match("^drafts.") == false] {
                 _id,
                 islandText,
+                "slug": slug.current,
                 category->{
                     id
                 },

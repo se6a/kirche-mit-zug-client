@@ -1,13 +1,14 @@
 <script>
 	import '$lib/styles/index.scss';
-
 	import {page} from '$app/stores';
 	import {browser} from '$app/environment';
 	import {beforeNavigate} from '$app/navigation';
-	import Favicon from '$lib/components/bits/Favicon.svelte';
+	import {setContext} from 'svelte';
 
 	const {children, data} = $props();
+	const {categories} = data;
 
+	setContext('categories', categories);
 	beforeNavigate(() => {
 		if (!browser) return;
 		document.getElementById('scroll')?.style?.setProperty('scroll-behavior', 'auto');
@@ -26,7 +27,19 @@
 			clearTimeout(timeout);
 		};
 	});
+
+	const cssVariables = [
+		`<${'style'}>`, // Svelte bug workaround
+		'body {',
+		...categories.map((c) => `--color-category${c.id}: ${c.color};`),
+		'}',
+		`</${'style'}>`,
+	].join('\n');
 </script>
+
+<svelte:head>
+	{@html cssVariables}
+</svelte:head>
 
 {#if children}
 	{@render children()}

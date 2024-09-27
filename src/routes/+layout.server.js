@@ -6,7 +6,8 @@ export async function load() {
             "categories": * [_type == "categories" && _id match("^drafts.") == false] {
                 id,
                 name, 
-                shortName
+                shortName,
+                "color": color.hex
             }    
         }`);
 		return data;

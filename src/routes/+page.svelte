@@ -5,15 +5,7 @@
 	import IslandsList from '$lib/components/objects/IslandsList.svelte';
 
 	const {data} = $props();
-	console.log(data);
-
-	const islandCount = 20;
-	const islands = [];
-	for (let i = 0; i < islandCount; i++) {
-		islands.push({
-			cat: Math.ceil(Math.random() * 7),
-		});
-	}
+	const islands = data.islands || [];
 </script>
 
 <Page>

@@ -3,7 +3,6 @@
 	import Counter from '../Counter.svelte';
 	import {onMount} from 'svelte';
 	import itemsLayout from './itemsLayout';
-	import categories from './categories';
 	import ItemIsland from './ItemIsland.svelte';
 	import Object from './Object.svelte';
 
@@ -17,14 +16,10 @@
 	let objectSlotCount = 0;
 	const islands = [];
 	for (let i = 0; i < data.length; i++) {
-		const randomCategory = categories[~~(Math.random() * categories.length)];
 		const itemLayout = itemsLayout[i % itemsLayout.length];
 		const item = {
 			itemLayout,
-			data: {
-				...data[i],
-				category: randomCategory,
-			},
+			data: data[i],
 		};
 		islands.push(item);
 		objectSlotCount += itemLayout?.objectSlots?.length || 0;

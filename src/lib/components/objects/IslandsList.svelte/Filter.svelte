@@ -1,9 +1,11 @@
 <script>
-	import categories from './categories';
+	import {getContext} from 'svelte';
 	const {setActiveCategories} = $props();
 
 	let showFilter = $state(true);
 	let NForm;
+
+	const categories = getContext('categories');
 
 	function selectOne(NSelected) {
 		const NChecked = [...NForm.querySelectorAll('input:checked')];
@@ -32,15 +34,15 @@
 
 	<form onchange={handleChange} bind:this={NForm}>
 		<fieldset>
-			{#each categories as { id, name }}
+			{#each categories as { id, shortName }}
 				<input id="cb-{id}" type="checkbox" data-category={id} />
 				<label
 					for="cb-{id}"
 					data-as="button1"
-					style:--button1-isActive-color1="var(--color-{id})"
+					style:--button1-isActive-color1="var(--color-category{id})"
 				>
 					<div>
-						{name}
+						{shortName}
 					</div>
 				</label>
 			{/each}
