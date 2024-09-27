@@ -77,6 +77,7 @@
 
 			header {
 				margin-bottom: var(--size-l);
+				white-space: pre-line;
 			}
 
 			address {
