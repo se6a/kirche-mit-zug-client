@@ -4,6 +4,9 @@
 	import SectionText from '$lib/components/layout/SectionText.svelte';
 	import IslandsList from '$lib/components/objects/IslandsList.svelte';
 
+	const {data} = $props();
+	console.log(data);
+
 	const islandCount = 20;
 	const islands = [];
 	for (let i = 0; i < islandCount; i++) {

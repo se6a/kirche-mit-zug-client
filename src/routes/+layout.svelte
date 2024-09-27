@@ -4,11 +4,9 @@
 	import {page} from '$app/stores';
 	import {browser} from '$app/environment';
 	import {beforeNavigate} from '$app/navigation';
-
 	import Favicon from '$lib/components/bits/Favicon.svelte';
 
-	const props = $props();
-	const children = props?.children;
+	const {children, data} = $props();
 
 	beforeNavigate(() => {
 		if (!browser) return;
