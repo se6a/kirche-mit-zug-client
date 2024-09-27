@@ -130,7 +130,7 @@ export default [
 		island: {
 			id: 7,
 			align: 'start',
-			position: {y: -12, x: 10},
+			position: {y: -6, x: 10},
 			size: 1,
 		},
 		objectSlots: [

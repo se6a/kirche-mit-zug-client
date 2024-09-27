@@ -23,7 +23,7 @@
 	{/if}
 </main>
 
-<Footer></Footer>
+<Footer data={data.footer}></Footer>
 
 <style lang="scss" global>
 	main {

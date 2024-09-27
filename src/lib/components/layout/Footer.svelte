@@ -1,5 +1,9 @@
 <script>
 	import Logo from '../bits/Logo.svelte';
+	import PortableText from '$lib/sanity/PortableText.svelte';
+	const {data} = $props();
+
+	const textContact = data.textContact || {};
 </script>
 
 <footer>
@@ -13,18 +17,11 @@
 		<section class="column _2">
 			<header>
 				<h2>
-					<div>KONTAKT UND</div>
-					<div>ORGANISATION</div>
+					{textContact.title}
 				</h2>
 			</header>
 			<address>
-				<div>Katholische Kirche Zug</div>
-				<div>Sandra Dietschi</div>
-				<div>Gesamtleitung Fachstellen</div>
-				<div>Landhausstrasse 15</div>
-				<div>6340 Baar</div>
-				<a href="mailto:">Mail</a>
-				<a href="tel:">Telefon</a>
+				<PortableText blocks={textContact.portableText}></PortableText>
 			</address>
 		</section>
 
@@ -53,6 +50,15 @@
 			padding: var(--page-padding);
 			display: grid;
 			grid-template-columns: 1fr 3fr 1fr;
+		}
+
+		a {
+			text-decoration: underline;
+		}
+
+		a:hover,
+		a:focus {
+			text-decoration-style: dashed;
 		}
 
 		.column._1 {

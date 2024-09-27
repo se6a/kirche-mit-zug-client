@@ -5,7 +5,7 @@
 	let {layout, index, imageModulus} = $props();
 	const {position} = layout;
 
-	const isImage = index !== 0 && index % imageModulus === 0;
+	const isImage = (index - 2) % imageModulus === 0;
 </script>
 
 <li

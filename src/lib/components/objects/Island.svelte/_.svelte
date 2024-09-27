@@ -7,7 +7,7 @@
 	const textColumns = 5; // odd number
 	const textRows = 7; // odd number
 	const centerCell = ~~((textColumns * textRows) / 2) + 1;
-	const hasLighthouse = Math.random() > 0.5;
+	const hasLighthouse = true; //Math.random() > 0.5;
 
 	const splitText = text
 		.split('\n')

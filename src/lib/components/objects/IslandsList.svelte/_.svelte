@@ -1,12 +1,14 @@
 <script>
 	import Filter from './Filter.svelte';
 	import Counter from '../Counter.svelte';
-	import {onMount} from 'svelte';
+	import {onMount, setContext} from 'svelte';
 	import itemsLayout from './itemsLayout';
 	import ItemIsland from './ItemIsland.svelte';
 	import Object from './Object.svelte';
 
 	const {data} = $props();
+	const {images, islands} = data;
+	setContext('images', images);
 
 	let NIslands;
 
@@ -14,18 +16,17 @@
 	 ******************************************************************************/
 
 	let objectSlotCount = 0;
-	const islands = [];
-	for (let i = 0; i < data.length; i++) {
+	const islandsPrepared = [];
+	for (let i = 0; i < islands.length; i++) {
 		const itemLayout = itemsLayout[i % itemsLayout.length];
 		const item = {
 			itemLayout,
-			data: data[i],
+			data: islands[i],
 		};
-		islands.push(item);
+		islandsPrepared.push(item);
 		objectSlotCount += itemLayout?.objectSlots?.length || 0;
 	}
-	const imageCount = 10;
-	const imageModulus = ~~(objectSlotCount / imageCount);
+	const imageModulus = Math.ceil(objectSlotCount / images.length);
 
 	/* Filter
 	 ******************************************************************************/
@@ -50,7 +51,7 @@
 		}
 	}
 
-	let visibleItemCount = $state(islands.length);
+	let visibleItemCount = $state(islandsPrepared.length);
 	function setVisibleItemCount() {
 		visibleItemCount = [...NIslands.querySelectorAll("li[data-is-active='true']")].length;
 	}
@@ -98,6 +99,8 @@
 	onMount(() => {
 		handleResize();
 	});
+
+	let index = 0;
 </script>
 
 <div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
@@ -105,12 +108,13 @@
 
 	<div class="_count">
 		<span>
-			<Counter crntNumber={visibleItemCount} />/{islands.length}
+			<Counter crntNumber={visibleItemCount} />/{islandsPrepared.length}
 		</span><span>Inseln</span>
 	</div>
 
 	<ul bind:this={NIslands}>
-		{#each islands as { data, itemLayout }, i}
+		{#each islandsPrepared as { data, itemLayout }}
+			{index++ ? '' : ''}
 			<ItemIsland
 				layout={itemLayout.island}
 				{data}
@@ -118,8 +122,9 @@
 				{observeItemHeight}
 			></ItemIsland>
 
-			{#each itemLayout.objectSlots as objectLayout, ii}
-				<Object layout={objectLayout} index={ii + i} {imageModulus}></Object>
+			{#each itemLayout.objectSlots as objectLayout, i}
+				{(index += i) ? '' : ''}
+				<Object layout={objectLayout} {index} {imageModulus}></Object>
 			{/each}
 		{/each}
 	</ul>
@@ -164,7 +169,7 @@
 	}
 
 	ul {
-		--offsetTop: 0px;
+		--offsetTop: 14%;
 		margin-top: var(--offsetTop);
 		transition: margin-top var(--ms-m);
 		position: relative;
@@ -178,7 +183,7 @@
 	}
 
 	[data-is-filtered='true'] ul {
-		--offsetTop: calc(var(--filter-height) + var(--size-m));
+		--offsetTop: calc(var(--filter-height) + var(--size-xl));
 	}
 
 	/* RESPONSIVE
@@ -186,7 +191,6 @@
 	@media (width < 1250px) {
 		ul {
 			--filter-height: 0px;
-			margin-top: 14%;
 		}
 	}
 

@@ -5,15 +5,21 @@
 	import IslandsList from '$lib/components/objects/IslandsList.svelte';
 
 	const {data} = $props();
+	const page = data.page || {};
+	const footer = data.footer || {};
 	const islands = data.islands || [];
+	const images = page.images || [];
 </script>
 
-<Page>
+<Page data={{page, footer}}>
 	<PageSections>
-		<IslandsList data={islands}></IslandsList>
-		<SectionText id="ueber"></SectionText>
+		<IslandsList data={{islands, images}}></IslandsList>
+		<SectionText id="ueber" data={page.textAbout}></SectionText>
 	</PageSections>
 </Page>
 
-<!-- <style lang="scss">
-</style> -->
+<style lang="scss">
+	:global(.SECTION-TEXT) {
+		margin-top: var(--size-2xl);
+	}
+</style>
