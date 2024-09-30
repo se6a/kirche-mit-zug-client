@@ -2,10 +2,8 @@
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
 
-	const props = $props();
-	const children = props?.children;
+	const {children, data = {}, attributes = {}} = $props();
 
-	const data = props.data;
 	const title = '';
 	const description = '';
 </script>
@@ -17,13 +15,13 @@
 
 <Header></Header>
 
-<main class="PAGE-CONTENT">
+<main class="PAGE-CONTENT" {...attributes}>
 	{#if children}
 		{@render children()}
 	{/if}
 </main>
 
-<Footer data={data.footer}></Footer>
+<Footer data={data?.footer}></Footer>
 
 <style lang="scss" global>
 	main {
@@ -33,5 +31,6 @@
 		margin-right: auto;
 		padding-inline: var(--page-paddingX);
 		padding-top: var(--page-paddingY);
+		min-height: 100vh;
 	}
 </style>

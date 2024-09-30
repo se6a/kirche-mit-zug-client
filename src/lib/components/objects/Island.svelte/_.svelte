@@ -1,13 +1,13 @@
 <script>
 	import islands from './islands';
 	import LightHouse from './LightHouse.svelte';
-	const {id, text, children} = $props();
+	const {shape = 1, text = '', children = null} = $props();
 
-	const island = islands.find((island) => island.id === id);
+	const island = islands.find((island) => island.id === shape);
 	const textColumns = 5; // odd number
-	const textRows = 7; // odd number
+	const textRows = 19; // odd number
 	const centerCell = ~~((textColumns * textRows) / 2) + 1;
-	const hasLighthouse = true; //Math.random() > 0.5;
+	const hasLighthouse = Math.random() > 0.5;
 
 	const splitText = text
 		.split('\n')
@@ -17,7 +17,7 @@
 
 <div
 	class="ISLAND"
-	style:--island-clipPath="url(#clip-island-{id})"
+	style:--island-clipPath="url(#clip-island-{shape})"
 	style:--island-aspectRatio={island?.aspectRatio}
 	style:--island-textOffset={island?.textOffset}
 	style:--island-lighthousePosition={island?.lighthousePosition}
@@ -25,7 +25,7 @@
 >
 	<svg width="0" height="0">
 		<defs>
-			<clipPath id="clip-island-{id}" clipPathUnits="objectBoundingBox">
+			<clipPath id="clip-island-{shape}" clipPathUnits="objectBoundingBox">
 				<path d={island.d}></path>
 			</clipPath>
 		</defs>
@@ -61,6 +61,8 @@
 	.ISLAND {
 		width: 100%;
 		position: relative;
+		font-size: var(--island-fontSize, 2.2rem);
+		max-width: 32ch;
 	}
 
 	._inner {
@@ -83,11 +85,6 @@
 			background-color: var(--color-category, black);
 			z-index: -1;
 		}
-	}
-
-	.cell {
-		opacity: 1;
-		transition: opacity var(--ms-l);
 	}
 
 	:global(a:hover) ~ * .cell {
@@ -117,11 +114,11 @@
 		inset: 0;
 		margin: auto;
 		display: grid;
-		grid-template-columns: repeat(var(--columns), 1fr);
-		grid-template-rows: repeat(var(--rows), 1fr);
+		grid-template-columns: repeat(var(--columns), auto);
+		grid-template-rows: repeat(var(--rows), auto);
 		justify-content: center;
 		align-content: center;
-		gap: 1em;
+		gap: 0.4em;
 		pointer-events: none;
 		overflow: hidden;
 		line-height: 1;
@@ -130,12 +127,24 @@
 			// Avoid Render issues by translating every child node individually, not the parent
 			transform: translate(var(--island-textOffset));
 		}
+	}
 
-		> div {
-			width: 100%;
-			font-size: var(--font-size-l);
-			text-transform: uppercase;
-			white-space: nowrap;
-		}
+	.cell {
+		opacity: 1;
+		transition: opacity var(--ms-l);
+	}
+
+	.label,
+	.cell {
+		display: flex;
+		flex-direction: column;
+		text-transform: uppercase;
+		white-space: nowrap;
+	}
+
+	.label > :global(div),
+	.cell > :global(div) {
+		display: inline-block;
+		white-space: nowrap;
 	}
 </style>

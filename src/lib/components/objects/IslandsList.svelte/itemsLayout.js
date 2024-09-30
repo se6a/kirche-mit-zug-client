@@ -1,7 +1,7 @@
 export default [
 	{
 		island: {
-			id: 1,
+			shape: 1,
 			align: 'end',
 			position: {y: -18, x: 0},
 			size: 1,
@@ -24,7 +24,7 @@ export default [
 
 	{
 		island: {
-			id: 2,
+			shape: 2,
 			align: 'start',
 			position: {y: -40, x: -1},
 			size: 1.2,
@@ -46,7 +46,7 @@ export default [
 	},
 	{
 		island: {
-			id: 3,
+			shape: 3,
 			align: 'center',
 			position: {y: -16, x: 3},
 			size: 0.8,
@@ -68,7 +68,7 @@ export default [
 	},
 	{
 		island: {
-			id: 4,
+			shape: 4,
 			align: 'end',
 			position: {y: -12, x: 3},
 			size: 1,
@@ -90,7 +90,7 @@ export default [
 	},
 	{
 		island: {
-			id: 5,
+			shape: 5,
 			align: 'start',
 			position: {y: -20, x: 0},
 			size: 1.5,
@@ -112,7 +112,7 @@ export default [
 	},
 	{
 		island: {
-			id: 6,
+			shape: 6,
 			align: 'center',
 			position: {y: -2, x: 8},
 			size: 1.2,
@@ -128,7 +128,7 @@ export default [
 	},
 	{
 		island: {
-			id: 7,
+			shape: 7,
 			align: 'start',
 			position: {y: -6, x: 10},
 			size: 1,

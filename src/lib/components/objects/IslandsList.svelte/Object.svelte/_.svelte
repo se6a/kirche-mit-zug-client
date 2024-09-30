@@ -1,29 +1,28 @@
 <script>
 	import Image from './Image.svelte';
 	import Illustration from './Illustration.svelte';
-
 	let {layout, index, imageModulus} = $props();
 	const {position} = layout;
-
 	const isImage = (index - 2) % imageModulus === 0;
 </script>
 
 <li
-	class="OBJECT _{index}"
+	class="ITEM-OBJECT _{index}"
+	data-type={isImage ? 'image' : 'illustration'}
 	style:--object-x-normal="{position.normal.x}%"
 	style:--object-y-normal="{position.normal.y}%"
 	style:--object-x-small="{position.small.x}%"
 	style:--object-y-small="{position.small.y}%"
 >
 	{#if isImage}
-		<Image {index}></Image>
+		<Image {index} {imageModulus}></Image>
 	{:else}
 		<Illustration></Illustration>
 	{/if}
 </li>
 
 <style lang="scss">
-	.OBJECT {
+	.ITEM-OBJECT {
 		position: relative;
 		z-index: var(--z-front);
 		transition: transform var(--ms-s);
@@ -37,7 +36,7 @@
 		}
 	}
 
-	:global(.ISLANDS[data-is-filtered='true']) .OBJECT {
+	:global(.ISLANDS[data-is-filtered='true']) .ITEM-OBJECT {
 		transform: scale(0);
 		pointer-events: none;
 	}
@@ -46,15 +45,8 @@
 ******************************************************************************/
 
 	@media (width <= $bp-s-maxWidth) {
-		.OBJECT {
+		.ITEM-OBJECT {
 			:global(.usePosition) {
-				left: var(--object-x-small);
-				margin-top: var(--object-y-small);
-			}
-
-			._toggleImage {
-				width: 10%;
-				border-radius: 50%;
 				left: var(--object-x-small);
 				margin-top: var(--object-y-small);
 			}

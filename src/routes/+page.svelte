@@ -20,6 +20,23 @@
 
 <style lang="scss">
 	:global(.SECTION-TEXT) {
-		margin-top: var(--size-2xl);
+		margin-top: var(--size-xl);
+	}
+
+	:global([data-route='/']) {
+		:global(.PAGE-HEADER) {
+			position: absolute;
+		}
+	}
+
+	/* RESPONSIVE
+    **************************************************************************/
+
+	@media (width < $bp-m-maxWidth) {
+		:global([data-route='/']) {
+			:global(.PAGE-HEADER) {
+				position: relative;
+			}
+		}
 	}
 </style>

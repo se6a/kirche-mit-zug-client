@@ -9,7 +9,7 @@
     --page-clientOffset-x: max(var(--page-paddingX), calc((100vw - var(--page-maxWidth)) / 2));
     --page-clientWidth: calc(100vw - 2 * var(--page-clientOffset-x));
 
-    --header-height: 2.4em;
+    --header-height: 10rem;
     --header-paddingY: 0.4em;
     --header-paddingX: var(--page-paddingX);
     --header-padding: var(--header-paddingY) var(--header-paddingX);

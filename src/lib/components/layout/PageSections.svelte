@@ -1,7 +1,6 @@
 <script>
 	const props = $props();
 	const children = props?.children;
-	const data = props?.data || [];
 </script>
 
 <div class="PAGE-SECTIONS">
@@ -14,7 +13,7 @@
 	.PAGE-SECTIONS {
 		display: flex;
 		flex-direction: column;
-		padding-bottom: calc(3 * var(--size-xl));
+		padding-bottom: var(--size-xl);
 		gap: var(--gridL-gap);
 	}
 </style>

@@ -1,7 +1,9 @@
 <script>
+	import {afterNavigate} from '$app/navigation';
 	import {getContext} from 'svelte';
 	const {setActiveCategories} = $props();
 
+	let NFilter;
 	let showFilter = $state(true);
 	let NForm;
 
@@ -24,9 +26,21 @@
 		e.preventDefault();
 		selectOne(e.target);
 	}
+
+	afterNavigate(({from}) => {
+		if (from?.route?.id?.startsWith('/insel') === false) return;
+		const lastActive = localStorage.getItem('activeCategories');
+		if (!lastActive.length) return;
+		const categories = lastActive?.split(',').map((n) => parseInt(n));
+		setActiveCategories(categories);
+		categories.forEach((c) => {
+			const NInput = NFilter.querySelector(`input[data-category="${c}"]`);
+			if (NInput) NInput.checked = true;
+		});
+	});
 </script>
 
-<div class="FILTER" data-show-filter={showFilter}>
+<div class="FILTER" data-show-filter={showFilter} bind:this={NFilter}>
 	<input id="toggleShowFilter" type="checkbox" bind:checked={showFilter} />
 	<label for="toggleShowFilter" data-as="button1-outline">
 		<div>Filter</div>
@@ -61,6 +75,8 @@
 
 	#toggleShowFilter + label {
 		margin-bottom: var(--gridM-gapY);
+		--button1-isActive-color1: var(--color-0);
+		--button1-isInit-color2: var(--color-0);
 	}
 
 	[data-show-filter='false'] form {

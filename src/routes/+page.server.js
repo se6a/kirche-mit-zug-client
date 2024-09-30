@@ -13,7 +13,7 @@ export async function load() {
                 },
                 images[] {
                     alt,
-                    ...asset->{
+                    asset->{
                         url
                     }
                 }

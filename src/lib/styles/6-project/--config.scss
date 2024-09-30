@@ -1,34 +1,10 @@
-// :root {
-// 	--color-1: #d7a33f;
-// 	--color-2: #ffde48;
-// 	--color-3: #ffa42f;
-// 	--color-4: #ed6a6d;
-// 	--color-5: #dda8d7;
-// 	--color-6: #a7e1f4;
-// 	--color-7: #3f6db4;
-// }
-
-// [data-category='1'] {
-// 	--color-category: var(--color-1);
-// }
-// [data-category='2'] {
-// 	--color-category: var(--color-2);
-// }
-// [data-category='3'] {
-// 	--color-category: var(--color-3);
-// }
-// [data-category='4'] {
-// 	--color-category: var(--color-4);
-// }
-// [data-category='5'] {
-// 	--color-category: var(--color-5);
-// }
-// [data-category='6'] {
-// 	--color-category: var(--color-6);
-// }
-// [data-category='7'] {
-// 	--color-category: var(--color-7);
-// }
+:root {
+	--color-0: #f4f4f2;
+	--island-baseSize: 39%;
+	--island-lighthouseWidth: 6rem;
+	--object-illustrationWidth: 6rem;
+	--object-image-buttonWidth: 4rem;
+}
 
 [data-category='1'] {
 	--color-category: var(--color-category1);

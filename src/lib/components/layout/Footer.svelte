@@ -3,7 +3,7 @@
 	import PortableText from '$lib/sanity/PortableText.svelte';
 	const {data} = $props();
 
-	const textContact = data.textContact || {};
+	const textContact = data?.textContact || {};
 </script>
 
 <footer>
@@ -26,6 +26,12 @@
 		</section>
 
 		<div class="column _3">
+			<figure class="logo _2">
+				<img
+					src="/assets/logo-katholische-kirche-zug.png"
+					alt="Logo Katholische Kirche Zug"
+				/>
+			</figure>
 			<nav>
 				<a href="/impressum">Impressum</a>
 				<a href="/datenschutz">Datenschutz</a>
@@ -40,8 +46,8 @@
 		height: auto;
 		background-color: black;
 		color: white;
-		padding-top: var(--size-xl);
-		padding-bottom: var(--size-2xl);
+		padding-top: calc(2 * var(--size-m));
+		padding-bottom: calc(2 * var(--size-m));
 
 		.layout {
 			width: 100%;
@@ -65,6 +71,7 @@
 			display: flex;
 			flex-direction: column;
 			align-items: center;
+			margin-bottom: calc(2 * var(--size-m));
 
 			.LOGO {
 				width: 5em;
@@ -76,7 +83,7 @@
 			flex-direction: column;
 
 			header {
-				margin-bottom: var(--size-l);
+				margin-bottom: var(--size-m);
 				white-space: pre-line;
 			}
 
@@ -93,7 +100,12 @@
 		.column._3 {
 			display: flex;
 			flex-direction: column;
-			justify-content: flex-end;
+
+			.logo {
+				max-width: 66%;
+				margin-bottom: auto;
+				height: auto;
+			}
 
 			nav {
 				display: flex;
@@ -111,14 +123,22 @@
 				flex-direction: column;
 				justify-content: center;
 				margin: auto;
-				gap: var(--size-l);
+				gap: var(--size-m);
 				width: fit-content;
-
-				> * {
-				}
 
 				.column._1 {
 					align-items: flex-start;
+				}
+
+				.column._3 {
+					flex-direction: column-reverse;
+
+					.logo {
+						max-width: 50%;
+						margin-top: calc(3 * var(--size-m));
+						margin-bottom: unset;
+						height: auto;
+					}
 				}
 			}
 		}

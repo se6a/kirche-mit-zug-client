@@ -4,6 +4,7 @@
 	import {browser} from '$app/environment';
 	import {beforeNavigate} from '$app/navigation';
 	import {setContext} from 'svelte';
+	import Favicon from '$lib/components/bits/Favicon.svelte';
 
 	const {children, data} = $props();
 	const {categories} = data;
@@ -41,8 +42,22 @@
 	{@html cssVariables}
 </svelte:head>
 
-{#if children}
-	{@render children()}
-{/if}
+<div class="SITE" data-route={$page?.route?.id}>
+	{#if children}
+		{@render children()}
+	{/if}
+</div>
 
-<!-- <Favicon></Favicon> -->
+<Favicon></Favicon>
+
+<style lang="scss" global>
+	.SITE {
+		--color-siteBackground: var(--color-0);
+		background-color: var(--color-siteBackground);
+		transition: background-color var(--ms-m);
+
+		&[data-route^='/insel'] {
+			--color-siteBackground: var(--color-currentCategory, var(--color-0));
+		}
+	}
+</style>

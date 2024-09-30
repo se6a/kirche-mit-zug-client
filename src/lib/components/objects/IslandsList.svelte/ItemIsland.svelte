@@ -8,7 +8,7 @@
 		observeItemHeight,
 	} = $props();
 
-	const {align, id, position, size} = layout;
+	const {align, shape, position, size} = layout;
 	const {x, y} = position;
 </script>
 
@@ -24,8 +24,11 @@
 	use:observeItemHeight
 >
 	<div class="_inner">
-		<Island {id} text={data.islandText}>
-			<a href="/insel/{data.slug}" aria-label="Link zur Unterseite: {data.islandText}"></a>
+		<Island {shape} text={data.islandText}>
+			<a
+				href="/insel/{data.slug}?shape={shape}"
+				aria-label="Link zur Unterseite: {data.islandText}"
+			></a>
 		</Island>
 	</div>
 </li>

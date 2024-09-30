@@ -11,6 +11,6 @@
 	xmlns="http://www.w3.org/2000/svg"
 	{...attributes}
 >
-	<path d="M40 13H0" stroke="black" stroke-miterlimit="10" />
-	<path d="M25 26 L50 13 L25 0" stroke="black" stroke-miterlimit="10" />
+	<path d="M48 13 H0" stroke="black" stroke-miterlimit="10" />
+	<path d="M25 26 L50 13 L25 0" stroke="black" stroke-miterlimit="100" />
 </svg>

@@ -52,3 +52,13 @@
 [data-layout~='3-1'] {
 	grid-template-columns: 3fr 1fr;
 }
+
+[data-layout~='2-1'] {
+	grid-template-columns: 2fr 1fr;
+
+	&[data-layout~='rsp-1'] {
+		@media (width <= $bp-l-maxWidth) {
+			grid-template-columns: 100% !important;
+		}
+	}
+}
