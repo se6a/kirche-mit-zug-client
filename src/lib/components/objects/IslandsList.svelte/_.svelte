@@ -102,6 +102,7 @@
 		handleResize();
 	});
 
+	// svelte-ignore non_reactive_update
 	let index = 0;
 </script>
 
