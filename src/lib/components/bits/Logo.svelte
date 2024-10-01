@@ -117,6 +117,7 @@
 		position: relative;
 	}
 	svg {
+		width: auto;
 		path,
 		rect {
 			fill: currentColor;
