@@ -76,6 +76,11 @@
 		height: 100%;
 	}
 
+	// Safari Fix
+	:global(.ISLANDS) [data-aspect-ratio='tall'] ._clipped {
+		height: 97%;
+	}
+
 	[data-aspect-ratio='wide'] ._clipped {
 		width: 100%;
 	}
