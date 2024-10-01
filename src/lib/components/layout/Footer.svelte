@@ -49,6 +49,10 @@
 		padding-top: calc(2 * var(--size-m));
 		padding-bottom: calc(2 * var(--size-m));
 
+		h2 {
+			font-size: var(--font-size-l);
+		}
+
 		.layout {
 			width: 100%;
 			margin-left: auto;
