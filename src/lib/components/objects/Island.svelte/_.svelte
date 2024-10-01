@@ -75,8 +75,8 @@
 		clip-path: var(--island-clipPath);
 		z-index: 99;
 		aspect-ratio: 1;
-		height: 100%;
-		width: auto;
+		min-width: 100%;
+		min-height: 100%;
 
 		&::after {
 			content: '';
