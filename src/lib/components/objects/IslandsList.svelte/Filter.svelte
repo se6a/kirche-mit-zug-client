@@ -102,5 +102,6 @@
 		width: 0px;
 		height: 0px;
 		position: absolute;
+		opacity: 0.00001;
 	}
 </style>
