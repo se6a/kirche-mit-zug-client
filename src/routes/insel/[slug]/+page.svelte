@@ -120,18 +120,15 @@
 			height: 0px;
 		}
 
-		:global(._inner) {
-			margin: auto;
-		}
-
 		:global(.ISLAND[data-aspect-ratio='wide']) {
-			height: auto;
 			width: 100%;
+			max-width: 36ch;
 		}
 
-		:global(.ISLAND[data-aspect-ratio='tall'] ._inner) {
-			max-width: 30ch;
-			max-height: 70vh;
+		:global(.ISLAND[data-aspect-ratio='tall']) {
+			height: 100%;
+			max-height: 36ch;
+			width: auto;
 		}
 	}
 
