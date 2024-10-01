@@ -13,6 +13,7 @@
 	const {category} = island;
 
 	const page = {
+		footer: data.footer,
 		title: island.title,
 		description: `Eine Idee von ${island.initiators.join(', ')}.`,
 	};
@@ -26,7 +27,7 @@
 	});
 </script>
 
-<Page data={{page}}>
+<Page data={{...data, page}}>
 	<PageSections>
 		<section data-category={category.id}>
 			<div class="content">
