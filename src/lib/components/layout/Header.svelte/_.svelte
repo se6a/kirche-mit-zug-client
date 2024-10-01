@@ -23,6 +23,7 @@
 		padding: var(--page-padding);
 		z-index: var(--z-front);
 		pointer-events: none;
+		display: flex;
 
 		> * {
 			pointer-events: all;
@@ -31,6 +32,7 @@
 		a {
 			display: inline-block;
 			height: 100%;
+			margin-right: auto;
 		}
 
 		.LOGO {
