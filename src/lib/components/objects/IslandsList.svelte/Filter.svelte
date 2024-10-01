@@ -70,11 +70,11 @@
 		flex-direction: column;
 		align-items: center;
 		pointer-events: none;
-		font-size: var(--font-size-s);
+		font-size: var(--font-size-m);
 	}
 
 	#toggleShowFilter + label {
-		margin-bottom: var(--gridM-gapY);
+		margin-bottom: var(--gridS-gapY);
 		--button1-isActive-color1: var(--color-0);
 		--button1-isInit-color2: var(--color-0);
 	}
@@ -86,7 +86,7 @@
 	fieldset {
 		display: flex;
 		flex-wrap: wrap;
-		gap: var(--gridM-gap);
+		gap: var(--gridS-gap);
 		width: 100%;
 		max-width: 50ch;
 		justify-content: center;

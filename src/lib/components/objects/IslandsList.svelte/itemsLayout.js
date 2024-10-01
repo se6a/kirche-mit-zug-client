@@ -10,8 +10,8 @@ export default [
 			{
 				position: {
 					normal: {
-						x: 50,
-						y: -32,
+						x: 53,
+						y: -26,
 					},
 					small: {
 						x: 10,

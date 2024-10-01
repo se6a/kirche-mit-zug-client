@@ -5,6 +5,7 @@
 	import itemsLayout from './itemsLayout';
 	import ItemIsland from './ItemIsland.svelte';
 	import Object from './Object.svelte';
+	import Cta from '../Cta.svelte';
 
 	const {data} = $props();
 	const {images, islands} = data;
@@ -105,6 +106,10 @@
 </script>
 
 <div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
+	<div class="_cta">
+		<Cta></Cta>
+	</div>
+
 	<Filter {setActiveCategories} {setVisibleItemCount}></Filter>
 
 	<div class="_count">
@@ -133,6 +138,7 @@
 
 <style lang="scss">
 	.ISLANDS {
+		position: relative;
 		:global(.FILTER) {
 			z-index: 10;
 			position: absolute;
@@ -173,6 +179,7 @@
 		flex-direction: column;
 		z-index: 1;
 		width: 100%;
+		pointer-events: none;
 
 		min-height: 80vh;
 		min-height: 80dvh;
@@ -180,6 +187,10 @@
 
 		:global(li) {
 			isolation: isolate;
+		}
+
+		:global(li > *) {
+			pointer-events: all;
 		}
 
 		:global(li.ITEM-ISLAND) {
@@ -201,8 +212,6 @@
 
 	/* RESPONSIVE
 ******************************************************************************/
-	@media (width < 1250px) {
-	}
 
 	@media (width < 1100px) {
 		ul {
@@ -243,6 +252,7 @@
 
 		:global(.ISLAND) {
 			--island-fontSize: 1.4rem;
+			margin: auto;
 		}
 	}
 </style>

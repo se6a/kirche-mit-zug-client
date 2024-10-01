@@ -1,11 +1,15 @@
 <script>
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
+	import Cta from '../objects/Cta.svelte';
+	import {setContext} from 'svelte';
 
 	const {children, data = {}, attributes = {}} = $props();
-
+	const {page, footer} = data;
 	const title = '';
 	const description = '';
+
+	setContext('cta', page?.cta);
 </script>
 
 <svelte:head>
@@ -21,7 +25,7 @@
 	{/if}
 </main>
 
-<Footer data={data?.footer}></Footer>
+<Footer data={footer}></Footer>
 
 <style lang="scss" global>
 	main {

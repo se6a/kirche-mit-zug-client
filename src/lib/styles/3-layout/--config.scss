@@ -14,8 +14,8 @@
     --header-paddingX: var(--page-paddingX);
     --header-padding: var(--header-paddingY) var(--header-paddingX);
 
-    --gridS-gapX: var(--size-s) ;
-    --gridS-gapY:  var(--size-s);
+    --gridS-gapX: calc(1.5 * var(--size-s));
+    --gridS-gapY: calc(1.5 * var(--size-s));
     --gridS-gap: var(--gridS-gapY) var(--gridS-gapX);
 
     --gridM-gapX: var(--size-m) ;

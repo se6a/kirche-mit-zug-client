@@ -2,7 +2,7 @@
 	import PortableText from '$lib/sanity/PortableText.svelte';
 	import Anchor from '../bits/Anchor.svelte';
 	// import PortableText from "$lib/sanity/"
-	const {id, data} = $props();
+	const {id = '', data} = $props();
 </script>
 
 <section class="SECTION-TEXT">
@@ -24,8 +24,11 @@
 
 <style lang="scss">
 	header {
-		margin-bottom: var(--size-l);
+		margin-bottom: calc(3 * var(--size-m));
 		white-space: pre-line;
+		h2 {
+			font-size: var(--font-size-l);
+		}
 	}
 
 	._content :global(.PORTABLE-TEXT) {

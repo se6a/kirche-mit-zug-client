@@ -7,6 +7,9 @@ export async function load() {
             "page": * [_type == "page-start" && _id match("^drafts.") == false][0] {
                 description,
                 title,
+                cta {
+                    ...
+                },
                 textAbout {
                     title,
                     portableText
