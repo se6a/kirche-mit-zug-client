@@ -59,11 +59,6 @@
 		}
 	}
 
-	:global([data-is-filtered='true']) .CTA {
-		transform: rotate(0) scale(0) !important;
-		pointer-events: none;
-	}
-
 	@keyframes popup {
 		0% {
 			transform: scale(0);
@@ -80,6 +75,13 @@
 
 	/* RESPONSIVE
     **************************************************************************/
+	@media (width > $bp-s-maxWidth) {
+		:global([data-is-filtered='true']) .CTA {
+			transform: rotate(0) scale(0) !important;
+			pointer-events: none;
+		}
+	}
+
 	@media (width <= $bp-s-maxWidth) {
 		.CTA {
 			position: relative;
