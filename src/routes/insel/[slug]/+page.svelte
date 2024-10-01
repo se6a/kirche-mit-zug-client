@@ -136,7 +136,7 @@
 		ul {
 			display: flex;
 			flex-wrap: wrap;
-			gap: 0.4em;
+			gap: 0 0.4em;
 			li {
 				display: inline-block;
 				&:not(:last-child)::after {
