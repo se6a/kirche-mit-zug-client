@@ -232,7 +232,7 @@
 		}
 
 		:global(.ISLAND) {
-			--island-fontSize: 1.2rem;
+			--island-fontSize: 2rem;
 		}
 
 		._count {
@@ -251,7 +251,6 @@
 		}
 
 		:global(.ISLAND) {
-			--island-fontSize: 1.4rem;
 			margin: auto;
 		}
 	}

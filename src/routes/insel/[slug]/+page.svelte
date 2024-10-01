@@ -164,12 +164,6 @@
 		}
 	}
 	@media (width <= $bp-m-maxWidth) {
-		// :global([data-route^='/insel']) {
-		// 	:global(.PAGE-HEADER) {
-		// 		position: absolute;
-		// 	}
-		// }
-
 		.content {
 			grid-template-columns: 100%;
 
