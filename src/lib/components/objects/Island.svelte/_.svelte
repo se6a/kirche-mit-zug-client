@@ -69,6 +69,7 @@
 		aspect-ratio: var(--island-aspectRatio);
 		overflow: hidden;
 		height: 100%;
+		position: relative;
 	}
 
 	[data-aspect-ratio='tall'] ._clipped {
