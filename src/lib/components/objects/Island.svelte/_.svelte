@@ -63,7 +63,7 @@
 		position: relative;
 		font-size: var(--island-fontSize, 2.2rem);
 		max-width: 32ch;
-		height: 100%;
+		max-height: 100%;
 	}
 
 	._inner {
