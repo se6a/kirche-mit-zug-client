@@ -51,10 +51,10 @@
 				{/each}
 			</div>
 		</div>
+	</div>
 
-		<div class="_lighthouse">
-			<LightHouse></LightHouse>
-		</div>
+	<div class="_lighthouse">
+		<LightHouse></LightHouse>
 	</div>
 </div>
 
