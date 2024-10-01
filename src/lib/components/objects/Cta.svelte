@@ -41,11 +41,13 @@
 			padding: 1.4em;
 			animation: popup var(--ms-s) 1000ms;
 			animation-fill-mode: both;
+			display: flex;
+			justify-content: center;
+			align-items: center;
 		}
 
 		:global(a) {
 			width: 100%;
-			height: 100%;
 			display: flex;
 			align-items: center;
 			justify-content: center;

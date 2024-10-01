@@ -22,6 +22,7 @@
 	style:--island-textOffset={island?.textOffset}
 	style:--island-lighthousePosition={island?.lighthousePosition}
 	data-has-lighthouse={hasLighthouse}
+	data-aspect-ratio={island?.aspectRatio >= 1 ? 'wide' : 'tall'}
 >
 	<svg width="0" height="0">
 		<defs>
@@ -71,12 +72,18 @@
 		height: 100%;
 	}
 
+	[data-aspect-ratio='tall'] ._clipped {
+		height: 100%;
+	}
+
+	[data-aspect-ratio='wide'] ._clipped {
+		width: 100%;
+	}
+
 	._clipped {
 		clip-path: var(--island-clipPath);
 		z-index: 99;
 		aspect-ratio: 1;
-		min-width: 100%;
-		min-height: 100%;
 
 		&::after {
 			content: '';
