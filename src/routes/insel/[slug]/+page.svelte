@@ -116,15 +116,22 @@
 		position: relative;
 		margin-right: auto;
 
-		:global(*) {
-			height: 100%;
-		}
 		:global(svg) {
 			height: 0px;
 		}
 
 		:global(._inner) {
 			margin: auto;
+		}
+
+		:global(.ISLAND[data-aspect-ratio='wide']) {
+			height: auto;
+			width: 100%;
+		}
+
+		:global(.ISLAND[data-aspect-ratio='tall'] ._inner) {
+			max-width: 30ch;
+			max-height: 70vh;
 		}
 	}
 
