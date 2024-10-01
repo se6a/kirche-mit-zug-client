@@ -8,7 +8,7 @@
 {#if useCta}
 	<div class="CTA">
 		<div class="_inner" data-as="buttonRound1">
-			<Link {cta}>
+			<Link data={cta.link}>
 				{cta?.label}
 			</Link>
 		</div>

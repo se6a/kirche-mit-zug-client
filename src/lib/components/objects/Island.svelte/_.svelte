@@ -59,23 +59,24 @@
 
 <style lang="scss">
 	.ISLAND {
-		width: 100%;
 		position: relative;
 		font-size: var(--island-fontSize, 2.2rem);
 		max-width: 32ch;
+		height: 100%;
 	}
 
 	._inner {
 		aspect-ratio: var(--island-aspectRatio);
 		overflow: hidden;
+		height: 100%;
 	}
 
 	._clipped {
 		clip-path: var(--island-clipPath);
 		z-index: 99;
 		aspect-ratio: 1;
-		min-width: 100%;
-		min-height: 100%;
+		height: 100%;
+		width: auto;
 
 		&::after {
 			content: '';

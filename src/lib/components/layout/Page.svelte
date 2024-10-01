@@ -1,13 +1,12 @@
 <script>
 	import Footer from './Footer.svelte';
 	import Header from './Header.svelte';
-	import Cta from '../objects/Cta.svelte';
 	import {setContext} from 'svelte';
 
 	const {children, data = {}, attributes = {}} = $props();
 	const {page, footer} = data;
-	const title = '';
-	const description = '';
+	const title = page?.title === 'Start' ? '' : page?.title;
+	const description = page?.description;
 
 	setContext('cta', page?.cta);
 </script>

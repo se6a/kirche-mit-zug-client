@@ -12,6 +12,11 @@
 	const shape = island.shape ? parseInt(island.shape) : 1;
 	const {category} = island;
 
+	const page = {
+		title: island.title,
+		description: `Eine Idee von ${island.initiators.join(', ')}.`,
+	};
+
 	onMount(() => {
 		if (!browser) return;
 		document.body.style.setProperty(
@@ -21,7 +26,7 @@
 	});
 </script>
 
-<Page {data}>
+<Page data={{page}}>
 	<PageSections>
 		<section data-category={category.id}>
 			<div class="content">
