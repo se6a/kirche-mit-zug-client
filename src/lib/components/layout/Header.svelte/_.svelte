@@ -48,7 +48,7 @@
 
 			:global(.icon) {
 				transform: rotate(180deg);
-				stroke-width: 0.22rem;
+				stroke-width: 0.18rem;
 			}
 		}
 	}
