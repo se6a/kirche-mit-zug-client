@@ -7,7 +7,6 @@
 	const footer = data.footer || {};
 
 	const content = page?.code?.code;
-	console.log(page);
 </script>
 
 <Page data={{page, footer}}>
