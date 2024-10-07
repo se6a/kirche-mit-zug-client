@@ -164,7 +164,7 @@
 
 	._illustration {
 		width: 100%;
-		max-width: 400px;
+		max-height: 60vh;
 	}
 
 	/* RESPONSIVE
@@ -199,6 +199,7 @@
 			._illustration {
 				grid-column: 1;
 				grid-row: 4;
+				max-width: 400px;
 			}
 		}
 	}
