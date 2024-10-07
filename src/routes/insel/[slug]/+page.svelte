@@ -48,16 +48,19 @@
 						</h2>
 					</header>
 
-					<div class="_initiators">
-						<h3>Initiiert von:</h3>
-						<ul>
-							{#each island?.initiators || [] as name}
-								<li>
-									{name}
-								</li>
-							{/each}
-						</ul>
-					</div>
+					{#if island?.initiators?.length}
+						<div class="_initiators">
+							<h3>Initiiert von:</h3>
+							<ul>
+								{#each island.initiators || [] as name}
+									<li>
+										{name}
+									</li>
+								{/each}
+							</ul>
+						</div>
+					{/if}
+
 					<div class="_category">
 						Kategorie: {category?.name}
 					</div>
