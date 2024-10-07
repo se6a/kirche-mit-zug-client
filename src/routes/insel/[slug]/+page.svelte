@@ -13,30 +13,32 @@
 	const {category} = island;
 
 	const page = {
-		footer: data.footer,
-		title: island.title,
-		description: `Eine Idee von ${island.initiators.join(', ')}.`,
+		footer: data?.footer,
+		title: island?.title,
+		description: `Eine Idee von ${island?.initiators?.join(', ')}.`,
 	};
 
 	onMount(() => {
 		if (!browser) return;
 		document.body.style.setProperty(
 			'--color-currentCategory',
-			`var(--color-category${category.id})`,
+			`var(--color-category${category?.id})`,
 		);
 	});
 </script>
 
 <Page data={{...data, page}}>
 	<PageSections>
-		<section data-category={category.id}>
+		<section data-category={category?.id}>
 			<div class="content">
 				<div class="_island">
 					<Island {shape} text={island?.islandText || ''}></Island>
 				</div>
 
 				<div class="_photo">
-					<Image data={island.image}></Image>
+					{#if island.image}
+						<Image data={island?.image}></Image>
+					{/if}
 				</div>
 
 				<div class="_text">
@@ -65,7 +67,9 @@
 				</div>
 
 				<div class="_illustration">
-					<Image data={island.illustration}></Image>
+					{#if island?.illustration}
+						<Image data={island.illustration}></Image>
+					{/if}
 				</div>
 			</div>
 		</section>
@@ -156,7 +160,7 @@
 	}
 
 	._illustration {
-		width: 50%;
+		width: 100%;
 		max-width: 400px;
 	}
 
