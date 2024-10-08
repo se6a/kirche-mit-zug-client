@@ -1,21 +1,23 @@
 <script>
 	import Image from './Image.svelte';
 	import Illustration from './Illustration.svelte';
-	let {layout, index, imageModulus} = $props();
+	import {getContext} from 'svelte';
+	let {layout, index} = $props();
 	const {position} = layout;
-	const isImage = (index - 2) % imageModulus === 0;
+	const imagesByRandomIndex = getContext('imagesByRandomIndex');
+	const image = imagesByRandomIndex?.[index];
 </script>
 
 <li
 	class="ITEM-OBJECT _{index}"
-	data-type={isImage ? 'image' : 'illustration'}
+	data-type={image ? 'image' : 'illustration'}
 	style:--object-x-normal="{position.normal.x}%"
 	style:--object-y-normal="{position.normal.y}%"
 	style:--object-x-small="{position.small.x}%"
 	style:--object-y-small="{position.small.y}%"
 >
-	{#if isImage}
-		<Image {index} {imageModulus}></Image>
+	{#if image}
+		<Image {index} data={image}></Image>
 	{:else}
 		<Illustration></Illustration>
 	{/if}

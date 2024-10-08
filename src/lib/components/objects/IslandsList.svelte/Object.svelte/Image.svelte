@@ -1,11 +1,7 @@
 <script>
 	import Image from '$lib/sanity/Image.svelte';
-	import {getContext} from 'svelte';
 
-	const {index, imageModulus} = $props();
-	const images = getContext('images');
-	const imageIndex = (index - 2) / imageModulus;
-	const image = images[imageIndex];
+	const {data, index} = $props();
 	let NToggle;
 
 	function getParentListItem(N) {
@@ -62,7 +58,7 @@
 	<!-- svelte-ignore a11y_no_static_element_interactions -->
 	<!-- svelte-ignore a11y_click_events_have_key_events -->
 	<div class="_image" onclick={handleImageClick}>
-		<Image data={image}></Image>
+		<Image {data}></Image>
 	</div>
 </div>
 

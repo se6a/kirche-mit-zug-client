@@ -9,14 +9,13 @@
 
 	const {data} = $props();
 	const {images, islands} = data;
-	setContext('images', images);
-
 	let NIslands;
 
 	/* Preparing Data
 	 ******************************************************************************/
 
 	let objectSlotCount = 0;
+	const objectSlotIndices = [];
 	const islandsPrepared = [];
 	for (let i = 0; i < islands.length; i++) {
 		const itemLayout = itemsLayout[i % itemsLayout.length];
@@ -26,8 +25,21 @@
 		};
 		islandsPrepared.push(item);
 		objectSlotCount += itemLayout?.objectSlots?.length || 0;
+
+		itemLayout?.objectSlots.forEach(() => {
+			objectSlotIndices.push(objectSlotIndices.length);
+		});
 	}
-	const imageModulus = Math.ceil(objectSlotCount / images.length);
+	const imagesByRandomIndex = {};
+	let iteration = 0;
+	while (objectSlotIndices.length && iteration < images.length) {
+		const randomArrayPos = ~~(Math.random() * objectSlotIndices.length);
+		const randomSlotIndex = objectSlotIndices.splice(randomArrayPos, 1);
+		imagesByRandomIndex[randomSlotIndex] = images[iteration];
+		iteration++;
+	}
+
+	setContext('imagesByRandomIndex', imagesByRandomIndex);
 
 	/* Filter
 	 ******************************************************************************/
@@ -103,7 +115,7 @@
 	});
 
 	// svelte-ignore non_reactive_update
-	let index = 0;
+	let index = -1;
 </script>
 
 <div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
@@ -131,7 +143,7 @@
 
 			{#each itemLayout.objectSlots as objectLayout, i}
 				{(index += i) ? '' : ''}
-				<Object layout={objectLayout} {index} {imageModulus}></Object>
+				<Object layout={objectLayout} {index}></Object>
 			{/each}
 		{/each}
 	</ul>
@@ -214,7 +226,7 @@
 	/* RESPONSIVE
 ******************************************************************************/
 
-	@media (width < 1100px) {
+	@media (width < 1340px) {
 		ul {
 			--offsetTop: 10%;
 		}
