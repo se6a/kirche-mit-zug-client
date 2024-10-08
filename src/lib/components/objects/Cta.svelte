@@ -21,13 +21,17 @@
 		width: fit-content;
 
 		position: absolute;
-		top: calc(var(--filter-height) + 2 * var(--size-m));
+		---top: 0;
+		top: var(---top);
+
 		left: 0;
 		right: 0;
 		margin: auto;
 
 		transform: rotate(0deg) scale(1);
-		transition: transform var(--ms-m);
+		transition:
+			transform var(--ms-m),
+			top var(--ms-m);
 
 		&:hover {
 			transform: rotate(20deg) scale(1.1);
@@ -56,6 +60,18 @@
 			text-align: center;
 			text-transform: uppercase;
 			font-size: var(--font-size-m);
+		}
+	}
+
+	:global(.ISLANDS:has([data-show-filter='true'])) {
+		.CTA {
+			---top: calc(var(--filter-height) + 2 * var(--size-m));
+		}
+	}
+
+	:global(.ISLANDS:has([data-show-filter='false'])) {
+		.CTA {
+			---top: calc(4 * var(--size-m));
 		}
 	}
 
