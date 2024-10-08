@@ -35,9 +35,9 @@
 					<Island {shape} text={island?.islandText || ''}></Island>
 				</div>
 
-				<div class="_photo">
-					{#if island.image}
-						<Image data={island?.image}></Image>
+				<div class="_illustration">
+					{#if island.illustration}
+						<Image data={island?.illustration}></Image>
 					{/if}
 				</div>
 
@@ -69,9 +69,9 @@
 					</div>
 				</div>
 
-				<div class="_illustration">
-					{#if island?.illustration}
-						<Image data={island.illustration}></Image>
+				<div class="_photo">
+					{#if island?.image}
+						<Image data={island.image}></Image>
 					{/if}
 				</div>
 			</div>
@@ -89,7 +89,7 @@
 
 	.content {
 		display: grid;
-		grid-template-columns: 2fr 1fr;
+		grid-template-columns: 2fr 3fr;
 		grid-auto-flow: dense;
 		gap: var(--gridL-gap);
 
@@ -98,7 +98,7 @@
 			--island-fontSize: 2rem;
 		}
 
-		._photo {
+		._illustration {
 			grid-column: 1;
 		}
 
@@ -106,7 +106,7 @@
 			grid-column: 2;
 		}
 
-		._illustration {
+		._photo {
 			grid-column: 2;
 			grid-row: 3;
 		}
