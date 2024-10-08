@@ -100,6 +100,7 @@
 		}
 	}
 
+	:global(a:focus) ~ * .cell,
 	:global(a:hover) ~ * .cell {
 		opacity: 0;
 	}
