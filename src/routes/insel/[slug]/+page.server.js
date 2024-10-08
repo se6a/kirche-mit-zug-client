@@ -17,16 +17,20 @@ export async function load({params, url}) {
                         shortName
                     },
                     image {
+                        ...,
                         alt,
                         caption,
                         asset->{
+                            metadata,
                             url,
                         }
                     },
                     illustration {
+                        ...,
                         alt,
                         caption,
                         asset->{
+                            metadata,
                             url,
                         }
                     }

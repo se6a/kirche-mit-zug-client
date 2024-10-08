@@ -36,6 +36,8 @@
 	const hotspot = data?.hotspot;
 	const crop = data?.crop;
 
+	console.log({crop, hotspot});
+
 	const srcsets = createSrcsets({
 		url,
 		widthOriginal,

@@ -1,4 +1,5 @@
 export function maybeCrop(crop, widthOriginal, heightOriginal) {
+	console.log({crop, widthOriginal, heightOriginal});
 	if (!crop || !widthOriginal || !heightOriginal) return '';
 
 	const left = widthOriginal * crop.left;

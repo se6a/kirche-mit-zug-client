@@ -15,9 +15,12 @@ export async function load() {
                     portableText
                 },
                 images[] {
+                    ...,
                     alt,
+                    caption,
                     asset->{
-                        url
+                        metadata,
+                        url,
                     }
                 }
             },
