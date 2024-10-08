@@ -119,11 +119,11 @@
 </script>
 
 <div class="ISLANDS" data-is-filtered={isFiltered} use:observeFilterHeight>
-	<Filter {setActiveCategories} {setVisibleItemCount}></Filter>
-
 	<div class="_cta">
 		<Cta></Cta>
 	</div>
+
+	<Filter {setActiveCategories} {setVisibleItemCount}></Filter>
 
 	<div class="_count">
 		<span>

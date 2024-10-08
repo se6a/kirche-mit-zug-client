@@ -186,7 +186,7 @@
 				max-height: 70dvh;
 			}
 
-			._photo {
+			._illustration {
 				grid-column: 1;
 				grid-row: 3;
 			}
@@ -196,7 +196,7 @@
 				grid-row: 2;
 			}
 
-			._illustration {
+			._photo {
 				grid-column: 1;
 				grid-row: 4;
 				max-width: 400px;
