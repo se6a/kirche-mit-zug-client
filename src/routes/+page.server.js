@@ -30,6 +30,7 @@ export async function load() {
                 },
             }
         }`);
+
 		return data;
 	} catch (error) {
 		console.error(error);
