@@ -4,7 +4,7 @@
 	const {shape = 1, text = '', children = null} = $props();
 
 	const island = islands.find((island) => island.id === shape);
-	const textColumns = 5; // odd number
+	const textColumns = 7; // odd number
 	const textRows = 19; // odd number
 	const centerCell = ~~((textColumns * textRows) / 2) + 1;
 	const hasLighthouse = Math.random() > 0.5;
@@ -132,7 +132,7 @@
 		grid-template-rows: repeat(var(--rows), auto);
 		justify-content: center;
 		align-content: center;
-		gap: 0.4em;
+		gap: 0.4em 0.6em;
 		pointer-events: none;
 		overflow: hidden;
 		line-height: 1;
