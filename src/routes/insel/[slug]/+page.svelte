@@ -145,6 +145,7 @@
 	}
 
 	._initiators {
+		margin-bottom: 1em;
 		ul {
 			display: flex;
 			flex-wrap: wrap;
